@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Квадратное уравнение: Файл test.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Квадратное уравнение
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Функции</a> &#124;
+<a href="#var-members">Переменные</a>  </div>
+  <div class="headertitle">
+<div class="title">Файл test.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Решение квадратных уравнений  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для test.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="test_8c__incl.png" border="0" usemap="#test_8c" alt=""/></div>
+<!-- MAP 0 -->
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a2e884245b390ede532ffcc573285f1fc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a2e884245b390ede532ffcc573285f1fc">ScanfCoefficient</a> (char *NameOfCoeff)</td></tr>
+<tr class="memdesc:a2e884245b390ede532ffcc573285f1fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ввод коэффициентов по его имени  <a href="test_8c.html#a2e884245b390ede532ffcc573285f1fc">Подробнее...</a><br /></td></tr>
+<tr class="separator:a2e884245b390ede532ffcc573285f1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d17408d1d497f60fc79be362f381072"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a1d17408d1d497f60fc79be362f381072">SolveQE</a> (double a, double b, double c, double *x1, double *x2)</td></tr>
+<tr class="memdesc:a1d17408d1d497f60fc79be362f381072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Данная функция решает квадратное уравнение вида ax² + bx + c = 0.  <a href="test_8c.html#a1d17408d1d497f60fc79be362f381072">Подробнее...</a><br /></td></tr>
+<tr class="separator:a1d17408d1d497f60fc79be362f381072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6bbb9478dac04d0f6c74d6b8c735d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a0e6bbb9478dac04d0f6c74d6b8c735d9">SolveLin</a> (double a, double b, double x)</td></tr>
+<tr class="memdesc:a0e6bbb9478dac04d0f6c74d6b8c735d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Данная функция решает уравнение вида ax + b = 0.  <a href="test_8c.html#a0e6bbb9478dac04d0f6c74d6b8c735d9">Подробнее...</a><br /></td></tr>
+<tr class="separator:a0e6bbb9478dac04d0f6c74d6b8c735d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344acd39eb27b1413b7f3682779c75a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a> (double Num1, double Num2)</td></tr>
+<tr class="memdesc:a344acd39eb27b1413b7f3682779c75a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Данная функция сравнивает два числа с учетом погрешности <a class="el" href="test_8c.html#a34e1d1847451886f546da5b6c41ad982">Delta</a>.  <a href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">Подробнее...</a><br /></td></tr>
+<tr class="separator:a344acd39eb27b1413b7f3682779c75a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fbc369ede71ff0476140729100684b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a9fbc369ede71ff0476140729100684b2">UnitTest</a> (int <a class="el" href="test_8c.html#a1f3b9b0f9f3744ab5634e53d762f78ae">TestOrNot</a>)</td></tr>
+<tr class="memdesc:a9fbc369ede71ff0476140729100684b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unit Testing.  <a href="test_8c.html#a9fbc369ede71ff0476140729100684b2">Подробнее...</a><br /></td></tr>
+<tr class="separator:a9fbc369ede71ff0476140729100684b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Главная функция программы  <a href="test_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">Подробнее...</a><br /></td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Переменные</h2></td></tr>
+<tr class="memitem:a8728b370c759bab878807d5061ec16a2"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a8728b370c759bab878807d5061ec16a2">NoRoots</a> = 0</td></tr>
+<tr class="memdesc:a8728b370c759bab878807d5061ec16a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Действительных корней нет  <a href="test_8c.html#a8728b370c759bab878807d5061ec16a2">Подробнее...</a><br /></td></tr>
+<tr class="separator:a8728b370c759bab878807d5061ec16a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b649d99012b2a14fb1f0ecfcbfcbda4"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">OneRoot</a> = 1</td></tr>
+<tr class="memdesc:a5b649d99012b2a14fb1f0ecfcbfcbda4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уравнение имеет единственное решение  <a href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">Подробнее...</a><br /></td></tr>
+<tr class="separator:a5b649d99012b2a14fb1f0ecfcbfcbda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96cac436e3045f8b307580455df84cc"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#af96cac436e3045f8b307580455df84cc">TwoRoots</a> = 2</td></tr>
+<tr class="memdesc:af96cac436e3045f8b307580455df84cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уравнение имеет два решения  <a href="test_8c.html#af96cac436e3045f8b307580455df84cc">Подробнее...</a><br /></td></tr>
+<tr class="separator:af96cac436e3045f8b307580455df84cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07661bf3f87ab927179c133f3b7dbdf2"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a07661bf3f87ab927179c133f3b7dbdf2">Inf</a> = 3</td></tr>
+<tr class="memdesc:a07661bf3f87ab927179c133f3b7dbdf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Уравнение имеет бесконечное количество решений  <a href="test_8c.html#a07661bf3f87ab927179c133f3b7dbdf2">Подробнее...</a><br /></td></tr>
+<tr class="separator:a07661bf3f87ab927179c133f3b7dbdf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f3b9b0f9f3744ab5634e53d762f78ae"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a1f3b9b0f9f3744ab5634e53d762f78ae">TestOrNot</a> = 1</td></tr>
+<tr class="memdesc:a1f3b9b0f9f3744ab5634e53d762f78ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проводить Unit Testing или нет  <a href="test_8c.html#a1f3b9b0f9f3744ab5634e53d762f78ae">Подробнее...</a><br /></td></tr>
+<tr class="separator:a1f3b9b0f9f3744ab5634e53d762f78ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e1d1847451886f546da5b6c41ad982"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8c.html#a34e1d1847451886f546da5b6c41ad982">Delta</a> = 1E-6</td></tr>
+<tr class="memdesc:a34e1d1847451886f546da5b6c41ad982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Погрешность  <a href="test_8c.html#a34e1d1847451886f546da5b6c41ad982">Подробнее...</a><br /></td></tr>
+<tr class="separator:a34e1d1847451886f546da5b6c41ad982"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Решение квадратных уравнений </p>
+<dl class="section author"><dt>Автор</dt><dd>d0p1er </dd></dl>
+<dl class="section version"><dt>Версия</dt><dd>0.0.1 </dd></dl>
+<dl class="section date"><dt>Дата</dt><dd>сентябрь 2020 года </dd></dl>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a344acd39eb27b1413b7f3682779c75a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a344acd39eb27b1413b7f3682779c75a0">&#9670;&nbsp;</a></span>AreNumbersEqual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int AreNumbersEqual </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Num1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Num2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Данная функция сравнивает два числа с учетом погрешности <a class="el" href="test_8c.html#a34e1d1847451886f546da5b6c41ad982">Delta</a>. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">Num1</td><td>Первое число </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Num2</td><td>Второе число </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">if</span>(fabs(Num1 - Num2) &lt;= <a class="code" href="test_8c.html#a34e1d1847451886f546da5b6c41ad982">Delta</a>)</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Главная функция программы </p>
+<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="test_8c.html#a9fbc369ede71ff0476140729100684b2">UnitTest</a>(<a class="code" href="test_8c.html#a1f3b9b0f9f3744ab5634e53d762f78ae">TestOrNot</a>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    printf(<span class="stringliteral">&quot;Saluton mia amiko. This program will help you to solve qudratic equation ax² + bx + c = 0\nLet`s start\n&quot;</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">double</span> a = <a class="code" href="test_8c.html#a2e884245b390ede532ffcc573285f1fc">ScanfCoefficient</a>(<span class="stringliteral">&quot;a&quot;</span>), b = <a class="code" href="test_8c.html#a2e884245b390ede532ffcc573285f1fc">ScanfCoefficient</a>(<span class="stringliteral">&quot;b&quot;</span>), c = <a class="code" href="test_8c.html#a2e884245b390ede532ffcc573285f1fc">ScanfCoefficient</a>(<span class="stringliteral">&quot;c&quot;</span>), x1 = 0, x2 = 0;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> AmountOfRoots = <a class="code" href="test_8c.html#a1d17408d1d497f60fc79be362f381072">SolveQE</a>(a, b, c, &amp;x1, &amp;x2);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// printf(&quot;%i\n&quot;, AmountOfRoots);</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">switch</span>(AmountOfRoots)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">case</span> 0:  printf(<span class="stringliteral">&quot;No roots\n&quot;</span>);                                          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">case</span> 1:  printf(<span class="stringliteral">&quot;There is one root : x = %lf\n&quot;</span>, x1);                   <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">case</span> 2:  printf(<span class="stringliteral">&quot;There are two roots : x1 = %lf, x2 = %lf\n&quot;</span>, x1, x2);  <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">case</span> 3:  printf(<span class="stringliteral">&quot;There are Infinite roots\n&quot;</span>);                          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">default</span>: printf(<span class="stringliteral">&quot;ERROR\n&quot;</span>);                                             <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2e884245b390ede532ffcc573285f1fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e884245b390ede532ffcc573285f1fc">&#9670;&nbsp;</a></span>ScanfCoefficient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ScanfCoefficient </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>NameOfCoeff</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ввод коэффициентов по его имени </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">NameOfCoeff</td><td>Название коэффициента, которое должен ввести пользователь </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">double</span> TempCoeff = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    printf(<span class="stringliteral">&quot;%s = &quot;</span>, NameOfCoeff);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    scanf(<span class="stringliteral">&quot;%lf&quot;</span>, &amp;TempCoeff);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> TempCoeff;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0e6bbb9478dac04d0f6c74d6b8c735d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6bbb9478dac04d0f6c74d6b8c735d9">&#9670;&nbsp;</a></span>SolveLin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SolveLin </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Данная функция решает уравнение вида ax + b = 0. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>Коэффициент квадратного уравнения a </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>Коэффициент квадратного уравнения b </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>Корень уравнения</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">AmountOfRoots</td><td>Количество решений </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(a, 0) &amp;&amp; <a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(b, 0))</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a07661bf3f87ab927179c133f3b7dbdf2">Inf</a>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(a, 0) &amp;&amp; !<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(b, 0))</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a8728b370c759bab878807d5061ec16a2">NoRoots</a>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    x = -b/a;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    printf(<span class="stringliteral">&quot;%lf\n&quot;</span>, x);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">OneRoot</a>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1d17408d1d497f60fc79be362f381072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d17408d1d497f60fc79be362f381072">&#9670;&nbsp;</a></span>SolveQE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SolveQE </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>x2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Данная функция решает квадратное уравнение вида ax² + bx + c = 0. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>Коэффициент квадратного уравнения a </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>Коэффициент квадратного уравнения b </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>Коэффициент квадратного уравнения c </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x1</td><td>Указатель первого корня квадратного уравнения </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x2</td><td>Указатель второго корня квадратного уравнения</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">AmountOfRoots</td><td>Количество решений</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Корни квадратного уравнения находятся по формуле: </p><p class="formulaDsp">
+\[ x_{1,2} = \frac{-b \pm \sqrt{D}}{2a} \, ,где \, D = b^2 -4ac \]
+</p>
+ <div class="fragment"><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(a, 0))</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a0e6bbb9478dac04d0f6c74d6b8c735d9">SolveLin</a>(b, c, *x1);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(b, 0) &amp;&amp; <a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(c, 0))</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        *x1 = 0;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">OneRoot</a>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(c, 0))</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        *x1 = 0;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">OneRoot</a> + <a class="code" href="test_8c.html#a0e6bbb9478dac04d0f6c74d6b8c735d9">SolveLin</a>(a, b, *x2);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">double</span> D = b*b - 4*a*c;     </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// printf(&quot;%lf\n&quot;, D);</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(D, 0))</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        *x1 = -b/(2*a);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">OneRoot</a>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span>(D &lt; 0)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="test_8c.html#a8728b370c759bab878807d5061ec16a2">NoRoots</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    D = sqrt(D);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    *x1 = (-b + D)/(2*a);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    *x2 = (-b - D)/(2*a);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="test_8c.html#af96cac436e3045f8b307580455df84cc">TwoRoots</a>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9fbc369ede71ff0476140729100684b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fbc369ede71ff0476140729100684b2">&#9670;&nbsp;</a></span>UnitTest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UnitTest </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TestOrNot</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unit Testing. </p>
+<p>Пока что функция юнит тестирования работает не очень хорошо ( на некоторых тестах выдает ошибку )</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">TestOrNot</td><td>Проводить Unit Testing или нет</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Предупреждения</dt><dd>Данная функция находится на стадии бета-теста </dd></dl>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000002">Ошибка:</a></b></dt><dd>Неправильное присвоение значений переменным ResultX1 и ResultX2 </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Необходимо сделать:</a></b></dt><dd>Исправить ошибку </dd></dl>
+<div class="fragment"><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a1f3b9b0f9f3744ab5634e53d762f78ae">TestOrNot</a>)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordtype">int</span> TestA[] =               { 1,  0,   1,   0,   0,   1,    2,         10,   1,           0,   0};</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordtype">int</span> TestB[] =               { 2,  0,   1,   0,   1,   4,    6,         12,   4.000000004, 2,   1};</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordtype">int</span> TestC[] =               { 1,  0,   1,   1,   0,   5,    2,         2,    4.000000001, 0,   1};</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordtype">int</span> TestAmountOfRoots[] =   { 1,  3,   0,   0,   1,   0,    2,         2,    1,           1,   1};</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordtype">double</span> TestX1[] =           {-1,  NAN, NAN, NAN, 0,   NAN, -0.381966, -0.2, -2,           0,  -1};</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordtype">double</span> TestX2[] =           { NAN,NAN, NAN, NAN, NAN, NAN, -2.618034, -1,    NAN,         NAN, NAN};</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordtype">int</span> AmountOfUnitTests = <span class="keyword">sizeof</span>(TestAmountOfRoots)/<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        printf(<span class="stringliteral">&quot;%i\n&quot;</span>, AmountOfUnitTests);  </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; AmountOfUnitTests; i++)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordtype">double</span> ResultX1 = NAN, ResultX2 = NAN; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keywordtype">int</span> ResultAmountOfRoots = <a class="code" href="test_8c.html#a1d17408d1d497f60fc79be362f381072">SolveQE</a>(TestA[i], TestB[i], TestC[i], &amp;ResultX1, &amp;ResultX2);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <span class="comment">// printf(&quot;%lf %lf\n&quot;, ResultX1[i], ResultX2[i]);</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="keywordflow">switch</span>(ResultAmountOfRoots)</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                <span class="keywordflow">case</span> 1:     <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(ResultX1, TestX1[i]))                                            printf(<span class="stringliteral">&quot;TEST%i PASSED:)\n&quot;</span>, i + 1); <span class="keywordflow">else</span> printf(<span class="stringliteral">&quot;TEST%i FAILED:( %i %lf %lf %lf\n&quot;</span>, i + 1, ResultAmountOfRoots, ResultX1, ResultX2, TestX1[i]);     <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <span class="keywordflow">case</span> 2:     <span class="keywordflow">if</span>(<a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(ResultX1, TestX1[i]) &amp;&amp; <a class="code" href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a>(ResultX2, TestX2[i]))    printf(<span class="stringliteral">&quot;TEST%i PASSED:)\n&quot;</span>, i + 1); <span class="keywordflow">else</span> printf(<span class="stringliteral">&quot;TEST%i FAILED:( %lf %lf %lf %lf\n&quot;</span>, i + 1, ResultX1, TestX1[i], ResultX2, TestX2[i]);  <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                <span class="keywordflow">default</span>:    <span class="keywordflow">if</span>(ResultAmountOfRoots == TestAmountOfRoots[i])                                         printf(<span class="stringliteral">&quot;TEST%i PASSED:)\n&quot;</span>, i + 1); <span class="keywordflow">else</span> printf(<span class="stringliteral">&quot;TEST%i FAILED:(\n&quot;</span>, i + 1);    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Переменные</h2>
+<a id="a34e1d1847451886f546da5b6c41ad982"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34e1d1847451886f546da5b6c41ad982">&#9670;&nbsp;</a></span>Delta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double Delta = 1E-6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Погрешность </p>
+
+</div>
+</div>
+<a id="a07661bf3f87ab927179c133f3b7dbdf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07661bf3f87ab927179c133f3b7dbdf2">&#9670;&nbsp;</a></span>Inf</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Inf = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Уравнение имеет бесконечное количество решений </p>
+
+</div>
+</div>
+<a id="a8728b370c759bab878807d5061ec16a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8728b370c759bab878807d5061ec16a2">&#9670;&nbsp;</a></span>NoRoots</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int NoRoots = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Действительных корней нет </p>
+
+</div>
+</div>
+<a id="a5b649d99012b2a14fb1f0ecfcbfcbda4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b649d99012b2a14fb1f0ecfcbfcbda4">&#9670;&nbsp;</a></span>OneRoot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int OneRoot = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Уравнение имеет единственное решение </p>
+
+</div>
+</div>
+<a id="a1f3b9b0f9f3744ab5634e53d762f78ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3b9b0f9f3744ab5634e53d762f78ae">&#9670;&nbsp;</a></span>TestOrNot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int TestOrNot = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проводить Unit Testing или нет </p>
+
+</div>
+</div>
+<a id="af96cac436e3045f8b307580455df84cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96cac436e3045f8b307580455df84cc">&#9670;&nbsp;</a></span>TwoRoots</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int TwoRoots = 2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Уравнение имеет два решения </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<div class="ttc" id="atest_8c_html_a34e1d1847451886f546da5b6c41ad982"><div class="ttname"><a href="test_8c.html#a34e1d1847451886f546da5b6c41ad982">Delta</a></div><div class="ttdeci">const double Delta</div><div class="ttdoc">Погрешность</div><div class="ttdef"><b>Definition:</b> test.c:19</div></div>
+<div class="ttc" id="atest_8c_html_a1f3b9b0f9f3744ab5634e53d762f78ae"><div class="ttname"><a href="test_8c.html#a1f3b9b0f9f3744ab5634e53d762f78ae">TestOrNot</a></div><div class="ttdeci">const int TestOrNot</div><div class="ttdoc">Проводить Unit Testing или нет</div><div class="ttdef"><b>Definition:</b> test.c:17</div></div>
+<div class="ttc" id="atest_8c_html_a0e6bbb9478dac04d0f6c74d6b8c735d9"><div class="ttname"><a href="test_8c.html#a0e6bbb9478dac04d0f6c74d6b8c735d9">SolveLin</a></div><div class="ttdeci">int SolveLin(double a, double b, double x)</div><div class="ttdoc">Данная функция решает уравнение вида ax + b = 0.</div><div class="ttdef"><b>Definition:</b> test.c:125</div></div>
+<div class="ttc" id="atest_8c_html_a9fbc369ede71ff0476140729100684b2"><div class="ttname"><a href="test_8c.html#a9fbc369ede71ff0476140729100684b2">UnitTest</a></div><div class="ttdeci">void UnitTest(int TestOrNot)</div><div class="ttdoc">Unit Testing.</div><div class="ttdef"><b>Definition:</b> test.c:162</div></div>
+<div class="ttc" id="atest_8c_html_a2e884245b390ede532ffcc573285f1fc"><div class="ttname"><a href="test_8c.html#a2e884245b390ede532ffcc573285f1fc">ScanfCoefficient</a></div><div class="ttdeci">int ScanfCoefficient(char *NameOfCoeff)</div><div class="ttdoc">Ввод коэффициентов по его имени</div><div class="ttdef"><b>Definition:</b> test.c:55</div></div>
+<div class="ttc" id="atest_8c_html_a5b649d99012b2a14fb1f0ecfcbfcbda4"><div class="ttname"><a href="test_8c.html#a5b649d99012b2a14fb1f0ecfcbfcbda4">OneRoot</a></div><div class="ttdeci">const int OneRoot</div><div class="ttdoc">Уравнение имеет единственное решение</div><div class="ttdef"><b>Definition:</b> test.c:13</div></div>
+<div class="ttc" id="atest_8c_html_a8728b370c759bab878807d5061ec16a2"><div class="ttname"><a href="test_8c.html#a8728b370c759bab878807d5061ec16a2">NoRoots</a></div><div class="ttdeci">const int NoRoots</div><div class="ttdoc">Действительных корней нет</div><div class="ttdef"><b>Definition:</b> test.c:12</div></div>
+<div class="ttc" id="atest_8c_html_a1d17408d1d497f60fc79be362f381072"><div class="ttname"><a href="test_8c.html#a1d17408d1d497f60fc79be362f381072">SolveQE</a></div><div class="ttdeci">int SolveQE(double a, double b, double c, double *x1, double *x2)</div><div class="ttdoc">Данная функция решает квадратное уравнение вида ax² + bx + c = 0.</div><div class="ttdef"><b>Definition:</b> test.c:80</div></div>
+<div class="ttc" id="atest_8c_html_af96cac436e3045f8b307580455df84cc"><div class="ttname"><a href="test_8c.html#af96cac436e3045f8b307580455df84cc">TwoRoots</a></div><div class="ttdeci">const int TwoRoots</div><div class="ttdoc">Уравнение имеет два решения</div><div class="ttdef"><b>Definition:</b> test.c:14</div></div>
+<div class="ttc" id="atest_8c_html_a07661bf3f87ab927179c133f3b7dbdf2"><div class="ttname"><a href="test_8c.html#a07661bf3f87ab927179c133f3b7dbdf2">Inf</a></div><div class="ttdeci">const int Inf</div><div class="ttdoc">Уравнение имеет бесконечное количество решений</div><div class="ttdef"><b>Definition:</b> test.c:15</div></div>
+<div class="ttc" id="atest_8c_html_a344acd39eb27b1413b7f3682779c75a0"><div class="ttname"><a href="test_8c.html#a344acd39eb27b1413b7f3682779c75a0">AreNumbersEqual</a></div><div class="ttdeci">int AreNumbersEqual(double Num1, double Num2)</div><div class="ttdoc">Данная функция сравнивает два числа с учетом погрешности Delta.</div><div class="ttdef"><b>Definition:</b> test.c:143</div></div>
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.17
+</small></address>
+</body>
+</html>
