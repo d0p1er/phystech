@@ -1,147 +1,148 @@
 #include "Stack.h"
 
 const char* path_logs = "Data/logs.txt";
+const type poison = 0xDEADBEEF;
 
-void StackConstruct(struct stack* thou, int capacity){	
-	if (capacity < 1)
-		Dump(thou, INCORRECT_CAPASITY, __FUNCTION__, __LINE__);
-
-	thou->data = (double*) calloc(capacity + 3, sizeof(thou->data[0]));
+void StackConstruct(struct Stack* thou){
+	thou->capacity = 1;
+	thou->data = (type*) calloc(thou->capacity + 3, sizeof(thou->data[0]));
 	
 	if (thou->data == NULL)
 		Dump(thou, NULL_DATA, __FUNCTION__, __LINE__);
 
-
-	thou->poison = NAN;
 	thou->size = 0;
-	thou->capacity = capacity;
 
-
-	thou->data[0] = thou->poison;
-	thou->data[capacity + 2] = thou->poison;
+	thou->data[0] = poison;
+	thou->data[1] = 0;
+	thou->data[3] = poison;
 	thou->data += 1;
 
-	thou->can_1 = thou->poison;
-	thou->can_2 = thou->poison;
+	thou->can_1 = poison;
+	thou->can_2 = poison;
 
-	for (size_t i = 0; i < capacity; i++){
-		thou->data[i] = thou->poison;
-	}
+	thou->hash_sum = CountHash((char*) thou, sizeof(thou->can_1), sizeof(*thou) - sizeof(thou->can_2) - sizeof(thou->hash_sum));
+	thou->data[thou->capacity] = CountHash((char*) thou->data, 0, sizeof(thou->data[0])*(thou->capacity));
 
-	thou->hash = CountHashStack(thou);
-	thou->data[thou->capacity] = CountHashData(thou);
+	Dump(thou, NO_ERRORS, __FUNCTION__, __LINE__);
+
+	int error = StackError(thou);
+	if (error)
+		Dump(thou, error, __FUNCTION__, __LINE__);
 }
 
 
-void StackPush(struct stack* thou, double value){
+void StackPush(struct Stack* thou, type value){
 	int error = StackError(thou);
 	if (error)
 		Dump(thou, error, __FUNCTION__, __LINE__);
 
-	printf("1\n");
-
-	Dump(thou, NO_ERRORS, __FUNCTION__, __LINE__);
-
-	if (thou->size == thou->capacity){
-		thou->data -= 1;
-		thou->capacity *= 2;
-		thou->data = (double*) realloc(thou->data, (thou->capacity + 3)*sizeof(thou->data));
-
-		if (thou->data == NULL)
-			Dump(thou, NULL_DATA, __FUNCTION__, __LINE__);
-
-		thou->data[0] = thou->poison;
-		thou->data[thou->capacity + 2] = thou->poison;
-		thou->data += 1;
-
-		for (size_t i = thou->size; i < thou->capacity; i++)
-			thou->data[i] = thou->poison;
-	}
+	if (thou->size == thou->capacity)
+		ResizeUp(thou);
 	
 	thou->data[thou->size] = value;
 	thou->size++;
 
-	thou->hash = CountHashStack(thou);
-	thou->data[thou->capacity] = CountHashData(thou);
+	thou->hash_sum = CountHash((char*) thou, sizeof(thou->can_1), sizeof(*thou) - sizeof(thou->can_2) - sizeof(thou->hash_sum));
+	thou->data[thou->capacity] = CountHash((char*) thou->data, 0, sizeof(thou->data[0])*(thou->capacity));
+
+	error = StackError(thou);
+	if (error)
+		Dump(thou, error, __FUNCTION__, __LINE__);
 }
 
 
-double StackPop(struct stack* thou){
+void ResizeUp(struct Stack* thou){
+	thou->data -= 1;
+	thou->capacity *= 2;
+	thou->data = (type*) realloc(thou->data, (thou->capacity + 3)*sizeof(thou->data[0]));
+
+	if (thou->data == NULL)
+		Dump(thou, NULL_DATA, __FUNCTION__, __LINE__);
+
+	thou->data[0] = poison;
+	thou->data[thou->capacity + 2] = poison;
+	thou->data += 1;
+
+	for (size_t i = thou->size; i < thou->capacity; i++)
+		thou->data[i] = 0;
+}
+	
+
+type StackPop(struct Stack* thou){
 	int error = StackError(thou);
 	if (error)
 		Dump(thou, error, __FUNCTION__, __LINE__);
 
 	if (thou->size == 0)
-		Dump(thou, STACK_EMPTY, __FUNCTION__, __LINE__);
-
-	Dump(thou, NO_ERRORS, __FUNCTION__, __LINE__);
+		Dump(thou, Stack_EMPTY, __FUNCTION__, __LINE__);
 
 	thou->size--;
-	double value = thou->data[thou->size];
-	thou->data[thou->size] = thou->poison;
+	type value = thou->data[thou->size];
+	thou->data[thou->size] = poison;
 
-	if (thou->size < thou->capacity/4){
-		thou->data -= 1;
-		thou->capacity /= 2;
-		thou->data = (double*) realloc(thou->data, (thou->capacity + 3)*sizeof(thou->data));
-		
-		if (thou->data == NULL)
-			Dump(thou, NULL_DATA, __FUNCTION__, __LINE__);
+	if (thou->size < thou->capacity / 4)
+		ResizeDown(thou);
 
-		thou->data[0] = thou->poison;
-		thou->data[thou->capacity + 2] = thou->poison;
-		thou->data += 1;
-	}
+	thou->hash_sum = CountHash((char*) thou, sizeof(thou->can_1), sizeof(*thou) - sizeof(thou->can_2) - sizeof(thou->hash_sum));
+	thou->data[thou->capacity] = CountHash((char*) thou->data, 0, sizeof(thou->data[0])*(thou->capacity));
 
-	thou->hash = CountHashStack(thou);
-	thou->data[thou->capacity] = CountHashData(thou);
+	error = StackError(thou);
+	if (error)
+		Dump(thou, error, __FUNCTION__, __LINE__);
 
 	return value;
 }
 
+void ResizeDown(struct Stack* thou){
+	thou->data -= 1;
+	thou->capacity /= 2;
+	thou->data = (type*) realloc(thou->data, (thou->capacity + 3)*sizeof(thou->data));
+	
+	if (thou->data == NULL)
+		Dump(thou, NULL_DATA, __FUNCTION__, __LINE__);
 
-void StackDestruct(struct stack* thou){
+	thou->data[0] = poison;
+	thou->data[thou->capacity + 2] = poison;
+	thou->data += 1;
+
+	for (size_t i = thou->size; i < thou->capacity; i++)
+		thou->data[i] = 0;
+}
+
+
+void StackDestruct(struct Stack* thou){
 	int error = StackError(thou);
 	if (error)
 		Dump(thou, error, __FUNCTION__, __LINE__);
 
-	// free(thou->data);
 
+	thou->capacity = 0;
 	thou->size = 0;
-	thou->capacity = 1;
-	thou->hash = CountHashStack(thou);
+	thou->data -= 1;
+	free(thou->data);
 
-	StackConstruct(thou, 1);
+	StackConstruct(thou);
 }
 
 
-void StackDelete(struct stack* thou){
-	int error = StackError(thou);
-	if (error)
-		Dump(thou, error, __FUNCTION__, __LINE__);
-
-	free(thou);
-}
-
-
-int StackError(struct stack* thou){
+int StackError(struct Stack* thou){
 	if (thou == NULL)
 		return NULL_POINTER;
 
 	if (thou->data == NULL)
 		return NULL_DATA;
 
-	// if(thou->can_1 != thou->poison || thou->can_1 != thou->poison || thou->data[-1] != thou->poison || thou->data[thou->capacity] != thou->poison)	// при poison != NAN
-	if (!isnan(thou->can_1) || !isnan(thou->can_1) || !isnan(thou->data[thou->capacity + 1]) || !isnan(thou->data[-1]))						// только для double
+	if(thou->can_1 != poison || thou->can_2 != poison || thou->data[-1] != poison || thou->data[thou->capacity + 1] != poison)
 		return INVASION;
 
 	if (thou->size < 0 || thou->capacity < 0)
 		return INDEX_OUT_OF_RANGE;
 
 	if (thou->size > thou->capacity)
-		return STACK_OVERFLOW;
+		return Stack_OVERFLOW;
 
-	if (thou->hash != CountHashStack(thou) || thou->data[thou->capacity] != CountHashData(thou))
+	if (thou->hash_sum != CountHash((char*) thou, sizeof(thou->can_1), sizeof(*thou) - sizeof(thou->can_2) - sizeof(thou->hash_sum)) || 
+		thou->data[thou->capacity] != CountHash((char*) thou->data, 0, sizeof(thou->data[0])*(thou->capacity)))
 		return BAD_HASH;
 
 
@@ -149,41 +150,24 @@ int StackError(struct stack* thou){
 }
 
 
-size_t CountHashStack(struct stack* thou){
-	int hash = 0;
-	size_t i_end = sizeof(*thou) - sizeof(thou->can_2) - sizeof(thou->hash);
-
-	char* str = (char*) thou;
+unsigned long long CountHash(char* str, const size_t i_start, const size_t i_end){
+	int hash_sum = 0;
 	
-	for (size_t i = sizeof(thou->can_1); i < i_end; i++){
-		hash += (int) *(str + i);
-		hash = RollHash(hash);
+	for (size_t i = i_start; i < i_end; i++) {
+		hash_sum += (unsigned long long) *(str + i);
+		hash_sum = RollHash(hash_sum);
 	}
 
-	return hash;
-}
-
-size_t CountHashData(struct stack* thou){
-	int hash = 0;
-	size_t i_end = sizeof(thou->data[0])*(thou->capacity);
-
-	char* str = (char*) thou;
-	
-	for (size_t i = 0; i < i_end; i++){
-		hash += (int) *(str + i);
-		hash = RollHash(hash);
-	}
-
-	return hash;
+	return hash_sum;
 }
 
 
-size_t RollHash(int hash){
-	return (hash << 1) | ((hash >> 31) & 1);
+unsigned long long RollHash(unsigned long long hash_sum){
+	return (hash_sum << 1) | (hash_sum >> 31);
 }
 
 
-void Dump(struct stack* thou, int error, const char* func, int line){
+void Dump(struct Stack* thou, int error, const char* func, const int line){
 	if (!error)
 		error = StackError(thou);
 
@@ -192,16 +176,17 @@ void Dump(struct stack* thou, int error, const char* func, int line){
 		case INCORRECT_CAPASITY:	PrintErrorLogs("(INCORRECT CAPASITY)", func, line, INCORRECT_CAPASITY);							exit(INCORRECT_CAPASITY);
 		case NULL_DATA:				PrintErrorLogs("(UNABLE ALLOCATE MEMORY)", func, line, NULL_DATA);								exit(NULL_DATA);
 		case NULL_POINTER:			PrintErrorLogs("(NULL POINTER)", func, line, NULL_POINTER);										exit(NULL_POINTER);
-		case STACK_OVERFLOW:		PrintErrorLogs("(STACK OVERFLOW)", func, line, STACK_OVERFLOW);			PrintStackLogs(thou);	exit(STACK_OVERFLOW);
+		case Stack_OVERFLOW:		PrintErrorLogs("(Stack OVERFLOW)", func, line, Stack_OVERFLOW);			PrintStackLogs(thou);	exit(Stack_OVERFLOW);
 		case INDEX_OUT_OF_RANGE:	PrintErrorLogs("(INDEX OUT OF RANGE)", func, line, INDEX_OUT_OF_RANGE);							exit(INDEX_OUT_OF_RANGE);
 		case INVASION:				PrintErrorLogs("(INVASION)", func, line, INVASION);						PrintStackLogs(thou);	exit(INVASION);
 		case BAD_HASH:				PrintErrorLogs("(BAD HASH)", func, line, BAD_HASH);						PrintStackLogs(thou);	exit(BAD_HASH);
+		default:					PrintErrorLogs("(UNKNOWN ERROR)", func, line, error);											exit(error);
 	}
 }
 
 
-void PrintErrorLogs(char* error, const char* func, int line, int error_number){
-	if(error != "Stack (ok)")
+void PrintErrorLogs(const char* error, const char* func, const int line, const int error_number){
+	if(error != "(ok)")
 		printf("ERROR[%d] %s CHECK LOGS\n", error_number, error);
 
 	FILE* logs_file = fopen(path_logs, "a");
@@ -215,15 +200,15 @@ void PrintErrorLogs(char* error, const char* func, int line, int error_number){
 }
 
 
-void PrintStackLogs(struct stack* thou){
+void PrintStackLogs(struct Stack* thou){
 	FILE* logs_file = fopen(path_logs, "a");
 
 	fprintf(logs_file, "\n[0x%X] {\n", thou);
-	fprintf(logs_file, "	can_1 = %lf\n", thou->can_1);
-	fprintf(logs_file, "	can_2 = %lf\n", thou->can_2);
-	fprintf(logs_file, "	hash = %ld\n", thou->hash);
-	fprintf(logs_file, "	size = %d\n", thou->size);
-	fprintf(logs_file, "	capacity = %d\n", thou->capacity);
+	fprintf(logs_file, "	can_1 = %lld\n", thou->can_1);
+	fprintf(logs_file, "	can_2 = %lld\n", thou->can_2);
+	fprintf(logs_file, "	hash_sum = %lld\n", thou->hash_sum);
+	fprintf(logs_file, "	size = %ld\n", thou->size);
+	fprintf(logs_file, "	capacity = %ld\n", thou->capacity);
 	fprintf(logs_file, "	data [0x%X] = {\n", thou->data);
 
 	if (thou->capacity > 0){

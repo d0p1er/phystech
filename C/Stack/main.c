@@ -2,15 +2,15 @@
 
 
 int main(){
-	struct stack stk = {};
+	struct Stack stk = {};
 
 	// Dump(&stk, NO_ERRORS, __FUNCTION__, __LINE__);
 
 	// printf("0x%X\n", stk);
-	StackConstruct(&stk, 1);
+	StackConstruct(&stk);
 	printf("construct\n");
 
-	printf("%lf\n", stk.data[stk.capacity + 2]);
+	// printf("%lf\n", stk.data[stk.capacity + 2]);
 
 	// printf("%d\n", &(stk.can_1));
 	// printf("%d\n", &(stk.poison));
@@ -27,8 +27,18 @@ int main(){
 	// }
 
 	// stk.size = 10;
+	// StackPush(&stk, 100);
 
+
+	StackPush(&stk, 200);
 	StackPush(&stk, 300);
+	StackPush(&stk, 200);
+	StackPush(&stk, 300);
+
+	StackPop(&stk);
+	StackPop(&stk);
+	StackPop(&stk);
+	StackPop(&stk);
 
 	printf("push\n");
 
