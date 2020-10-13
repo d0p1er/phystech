@@ -7,6 +7,7 @@
 #pragma once
 
 typedef double type;
+#define OUTPUT_FORMAT "%lf"
 
 struct Stack {
 	type can_1;
