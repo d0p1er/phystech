@@ -8,4 +8,5 @@
 
 #pragma once
 
-void Ass(char* path);
+void Ass(char* path_in, char* path_out);
+void ByteCode(int a, char* buffer);

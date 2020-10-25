@@ -8,4 +8,6 @@
 
 #pragma once
 
-void DisAss(char* path);
+void DisAss(char* path_in, char* path_out);
+int* GetByteCode(struct Text* text, size_t n_num);
+int ByteDecode(char* str_code);

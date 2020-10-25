@@ -1,33 +1,25 @@
 #include "disass.h"
 
-const double poison = NAN;
+// добавить PUSH_R
 
+void DisAss(char* path_in, char* path_out){
+	struct Text text = FillText(path_in);
+	size_t n_num = text.n_symbols / 32;
 
-void DisAss(char* path){
-	struct Text text = FillText(path);
-	printf("%ld\n", text.n_lines);
+	int* num_code = GetByteCode(&text, n_num);
 
 	FILE* output = fopen("disass_out.txt", "a");
 
-	for(size_t i = 0; i < text.n_lines; i++){
-		int cmd = 0;
-		sscanf(strtok(text.pointers[i], " \t"), "%d", &cmd);
+	int value = 0;
 
-		int value = 0;
-		int count = 0;
-
-		char* str_value = strtok(NULL, " \t");
-		if (str_value)
-			count = sscanf(str_value, "%d", &value);
-
-		// printf("%d %d\n", cmd, value);
+	for (size_t i = 0; i < n_num; i++){
 		#define DEF_CMD(name, num, arg, code) \
-				printf("%d %d\n", cmd, num); \
-				if(cmd == num){ \
-					if(isnan(value))\
+				if (num_code[i] == num) { \
+					if (arg == 0) \
 						fprintf(output, "%s\n", #name); \
-					else \
-						fprintf(output, "%s %d\n", #name, value);} \
+					else { \
+						value = num_code[++i]; \
+						fprintf(output, "%s %d\n", #name, value);}} \
 				else \
 					printf("SYNTAX ERROR\n");
 
@@ -44,4 +36,35 @@ void DisAss(char* path){
 	free(text.original_text);
 	printf("11\n");
 
+}
+
+int* GetByteCode(struct Text* text, size_t n_num){
+	int* num_code = (int*) calloc(n_num, sizeof(num_code[0]));
+
+	char* symbols_runner = text->original_text;
+	char tmp[33] = "";
+	size_t symbols_counter = 0;
+	size_t n_num_code = 0;
+
+	for (; *symbols_runner; symbols_runner++){
+		tmp[symbols_counter] = *symbols_runner;
+		symbols_counter++;
+
+		if (symbols_counter >= 32){
+			num_code[n_num_code] = ByteDecode(tmp);
+			printf("%d\n", num_code[n_num_code]);
+			n_num_code++;
+			symbols_counter = 0;
+		}
+	}
+
+	return num_code;
+}
+
+int ByteDecode(char* str_code){
+	int result = 0;
+	for (int i = 0; i < 32; i++)
+		result += str_code[i] == '1' ? pow(2, i) : 0;
+
+	return result;
 }

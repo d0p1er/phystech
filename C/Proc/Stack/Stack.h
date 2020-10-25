@@ -6,8 +6,8 @@
 
 #pragma once
 
-typedef int type;
-#define OUTPUT_FORMAT "%d"
+typedef long long int type;
+#define OUTPUT_FORMAT "%lld"
 
 struct Stack {
 	type can_1;
@@ -29,10 +29,11 @@ enum errors{
 	Stack_EMPTY = 5,
 	INDEX_OUT_OF_RANGE = 6,
 	BAD_HASH = 7,
-	INVASION_STACK_LEFT = 8,
-	INVASION_STACK_RIGHT = 9,
-	INVASION_DATA_LEFT = 10,
-	INVASION_DATA_RIGHT = 11
+	INVASION = 8
+	// INVASION_STACK_LEFT = 8,
+	// INVASION_STACK_RIGHT = 9,
+	// INVASION_DATA_LEFT = 10,
+	// INVASION_DATA_RIGHT = 11
 };
 
 extern const char* path_logs;

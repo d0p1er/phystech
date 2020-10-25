@@ -1,7 +1,7 @@
 #include "Ass/ass.h"
 
 int main(){
-	Ass("Data/ass.txt");
+	Ass("Data/ass.txt", "ass_out.txt");
 
 	printf("ASS\n");
 
@@ -12,9 +12,7 @@ int main(){
 // #include "DisAss/disass.h"
 
 // int main(){
-// 	DisAss("Data/byte.txt");
-
-// 	printf("22\n");
+// 	DisAss("Data/byte.txt", "disass_out.txt");
 
 // 	printf("DISASS\n");
 
@@ -27,7 +25,6 @@ int main(){
 // int main(){
 // 	CPU("ass_out.txt");
 
-// 	printf("33\n");
-
 // 	return 0;
 // }
+

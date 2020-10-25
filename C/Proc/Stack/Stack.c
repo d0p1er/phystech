@@ -129,8 +129,8 @@ int StackError(struct Stack* thou){
 	if (thou == NULL)
 		return NULL_POINTER;
 
-	if (thou->can_1 != poison ||  || thou->data[-1] != poison || thou->data[thou->capacity + 1] != poison)
-		return INVASION_STACK_LEFT;
+	if (thou->can_1 != poison || thou->can_2 != poison || thou->data[-1] != poison || thou->data[thou->capacity + 1] != poison)
+		return INVASION;
 
 	if (thou->can_2 != poison)
 
@@ -212,8 +212,8 @@ void PrintStackLogs(struct Stack* thou){
 
 	if (thou->capacity > 0){
 		for (size_t i = 0; i < thou->capacity; i++){
-			// if (thou->data[i] != thou->poison)	// если poison != NAN
-			if (!isnan(thou->data[i]))				// только для double
+			if (thou->data[i] != poison)	// если poison != NAN
+			// if (!isnan(thou->data[i]))				// только для double
 				fprintf(logs_file, "		*[%ld] = "OUTPUT_FORMAT"\n", i, thou->data[i]);
 			else
 				fprintf(logs_file, "		 [%ld] = "OUTPUT_FORMAT"\n", i, thou->data[i]);
