@@ -1,13 +1,12 @@
+#pragma once
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-#include "../Text/Text.h"
-#include "../Struct/Struct.h"
+#include <sys/stat.h>
 #include "../Data/CMD_NAME.h"
 
-#pragma once
+#define N_TAGS 20
 
 void DisAss(char* path_in, char* path_out);
-int* GetByteCode(struct Text* text, size_t n_num);
-int ByteDecode(char* str_code);
+void GetAssCode(double* tags, double* num_code, size_t n_num);

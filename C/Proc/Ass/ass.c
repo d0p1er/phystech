@@ -1,67 +1,118 @@
 #include "ass.h"
 
-void Ass(char* path_in, char* path_out){
+void Ass(char* path_in, char* path_out) {
 	struct Text text = FillText(path_in);
-	printf("%ld\n", text.n_lines);
 
-	FILE* output = fopen(path_out, "a");
+	double* tags = (double*) calloc(N_TAGS, sizeof(tags[0]));
 
-	for (size_t i = 0; i < text.n_lines; i++){
+	text = DeleteTags(tags, &text);
+	text.n_lines -= 1;
+
+	double* buffer = (double*) calloc(2 * text.n_lines, sizeof(buffer[0]));
+	size_t counter_elem = 0;	// counter n_cmd + n_value
+
+	fclose(fopen("listing.txt", "w"));
+	FILE* listing = fopen("listing.txt", "a");
+
+	for (size_t i = 0; i < text.n_lines; i++) {
 		char* cmd = strtok(text.pointers[i], " \t");
 
-		int value = 0;
+		double value = 0;
 		int count = 0;
 		char str_r[3] = "";
 		int r_x = -1;
 
 		char* str_value = strtok(NULL, " \t");
-		if (str_value) {
-			count = sscanf(str_value, "%d", &value);
+		if (str_value != NULL) {
+			count = sscanf(str_value, "%lf", &value);
 			if (!count){
 				count = sscanf(str_value, "%s", str_r);
-				if(str_r)
-					r_x = str_r[0] - 'A';
-			}
-		}
 
-		#define DEF_CMD(name, num, arg, code) \
-				if (strcmp(cmd, #name) == 0){ \
-					if (!count){ \
-						if(r_x >= 0) { \
-							char name_byte[33] = ""; \
-							ByteCode(CMD_##name, name_byte); \
-							char value_byte[33] = ""; \
-							ByteCode(r_x, value_byte); \
-							fprintf(output, "%s%s", name_byte, value_byte);} \
-						else { \
-							char name_byte[33] = ""; \
-							ByteCode(CMD_##name, name_byte); \
-							fprintf(output, "%s", name_byte);}} \
-					else{ \
-						char name_byte[33] = ""; \
-						ByteCode(CMD_##name, name_byte); \
-						char value_byte[33] = ""; \
-						ByteCode(value, value_byte); \
-						fprintf(output, "%s%s", name_byte, value_byte);}} \
-				else \
-					printf("SYNTAX ERROR\n");
+				if(count && str_r)
+					r_x = str_r[0] - 'A';
+					
+				}
+			}
+
+		#define EMIT(val) 					\
+			buffer[counter_elem] = val; 	\
+			counter_elem++; 
+
+		#define DEF_CMD(name, num, arg, code) 															\
+				if (strcmp(cmd, #name) == 0){ 															\
+					if (count){ 																		\
+						if (r_x >= 0) { 																\
+							EMIT(CMD_##name)															\
+							EMIT(r_x) 																	\
+							fprintf(listing, "%s %s -> %d %d\n", #name, str_r, CMD_##name, r_x);		\
+						}																				\
+						else { 																			\
+							EMIT(CMD_##name)															\
+							EMIT(value)																	\
+							fprintf(listing, "%s %lf -> %d %lf\n", #name, value, CMD_##name, value);	\
+						}																				\
+					}																					\
+					else { 																				\
+						EMIT(CMD_##name)																\
+						fprintf(listing, "%s -> %d\n", #name, CMD_##name);								\
+					}																					\
+				}																					
+				// else 									\
+				// 	printf("SYNTAX ERROR\n");
 
 		#include "../Data/commands.h"
 
 		#undef DEF_CMD
-
-		printf("%ld\n", i);
+		#undef EMIT
 	}
 
-	fclose(output);
+	FILE* f = fopen("test.bin", "wb");
+
+	fwrite(tags, N_TAGS, sizeof(tags[0]), f);
+	fwrite(buffer, counter_elem, sizeof(buffer[0]), f);
+
+	fclose(f);
+
 	free(text.pointers);
 	free(text.original_text);
-	printf("11\n");
+	free(tags);
+	free(buffer);
 }
 
-void ByteCode(int a, char* buffer){	
-	for (int i = 0; i < 32; i++)
-		*(buffer + 31 - i) = (a & (1 << (31 - i))) == 0 ? '0' : '1';
-	
-	printf("%s\n", buffer);
+struct Text DeleteTags(double* tags, struct Text* text) {
+	fclose(fopen("ass_without.txt", "w"));
+	FILE* code_without_tags = fopen("ass_without.txt", "a");
+	size_t counter_elem = 0;
+
+	for (size_t i = 0; i < text->n_lines; i++) {
+		int n_tag = -1;
+
+		char* pointer = strchr(text->pointers[i], ':');
+		if (pointer != NULL) {
+			int count = sscanf(text->pointers[i], "%d", &n_tag);
+
+			if (count)
+				tags[(int) n_tag] = counter_elem;
+		}
+		else
+			fprintf(code_without_tags, "%s\n", text->pointers[i]);
+
+		char* cmd = strtok(text->pointers[i], " \t");
+		printf("%s\n", cmd);
+
+		#define DEF_CMD(name, num, arg, code)			\
+				if (!strcmp(cmd, #name))				\
+					counter_elem += 1 + arg;
+		#include "../Data/commands.h"
+		#undef DEF_CMD
+
+		printf("%ld\n", counter_elem);
+
+	}
+
+	fclose(code_without_tags);
+
+	struct Text text_without_tags = FillText("ass_without.txt");
+
+	return text_without_tags;
 }
