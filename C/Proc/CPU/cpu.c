@@ -1,13 +1,7 @@
 #include "cpu.h"
 
 const char* path_logs_cpu = "logs_cpu.txt";
-const int INIT_CPU = 1;
-
-// RAM:
-//		0 - 99 		system memory
-//		100 - 199 	service stack
-//		200 - 299	tags
-//		300 - ...	read-write
+const double delta = 0.5;
 
 int CPU(char* path){
 	struct stat buff = {};
@@ -18,6 +12,8 @@ int CPU(char* path){
 
 	cpu.n_cmd = (buff.st_size - N_TAGS * sizeof(cpu.tags[0])) / sizeof(cpu.num_code[0]);
 
+
+	cpu.RAM = (double*) calloc(10000, sizeof(cpu.RAM[0]));
 	cpu.tags = (double*) calloc(N_TAGS, sizeof(cpu.tags[0]));
 	cpu.num_code = (double*) calloc(cpu.n_cmd, sizeof(cpu.num_code[0]));
 	cpu.regs = (double*) calloc(10, sizeof(cpu.regs[0]));
@@ -32,19 +28,31 @@ int CPU(char* path){
 
 	struct Stack stk = {};
 	StackConstruct(&stk);
-	double value = 0;
+
+	printf("%d\n", cpu.n_cmd);
 
 	for (size_t rip = 0; rip < cpu.n_cmd; rip++) {
-		// printf("%lf\n", cpu.num_code[rip]);
-		value = cpu.num_code[rip + 1];
+		double value = cpu.num_code[rip + 1];
+		double mode = cpu.num_code[rip + 2];
+
+		// printf("cmd %lf\n", cpu.num_code[rip]);
+		// printf("value %lf\n", value);
+		// printf("mode %d\n", (int) mode);
 
 		switch ((int) cpu.num_code[rip]){
-			#define DEF_CMD(name, num, arg, code) case num: if (arg != 0) rip++; code; break;
+			#define DEF_CMD(name, num, m, arg, code) case num: if (arg != 0) rip++; code; break;
 
 			#include "../Data/commands.h"
 			#undef DEF_CMD
 
-			default: return 0;
+			default: printf("unknown\n");;
 		}	
 	}
+}
+
+int AreNumbersEqual(double num_1, double num_2) {
+	if(fabs(num_1 - num_2) <= delta)
+		return 1;
+
+	return 0;
 }

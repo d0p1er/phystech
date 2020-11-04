@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include "../Data/CMD_NAME.h"
 
-#define N_TAGS 20
+#define N_TAGS 10
 
 void DisAss(char* path_in, char* path_out);
 void GetAssCode(double* tags, double* num_code, size_t n_num);

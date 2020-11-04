@@ -6,7 +6,7 @@
 #include "../Struct/Struct.h"
 #include "../Data/CMD_NAME.h"
 
-#define N_TAGS 20
+#define N_TAGS 10
 
 #pragma once
 
