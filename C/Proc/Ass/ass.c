@@ -19,7 +19,7 @@ void Ass(char* path_in, char* path_out) {
 	for (size_t i = 0; i < text.n_lines; i++) {
 		char* cmd = strtok(text.pointers[i], " \t");
 
-		int mode = 0;
+		int mode = simple_mode;
 		double value = 0;
 		int count = 0;
 		char str_r[5] = "";
@@ -32,14 +32,14 @@ void Ass(char* path_in, char* path_out) {
 				count = sscanf(str_value, "[%lf]", &value);
 				//ENUM
 				if (count) 
-					mode = 2;
+					mode = RAM_mode;
 				else {
 					char* pointer = strchr(str_value, '[');
 					if (pointer != NULL) {
 						count = sscanf(pointer, "[%s]", str_r);
 						if (count && str_r) {
 							value = str_r[0] - 'A';
-							mode = 3;
+							mode = RAM_reg_mode;
 						}
 					}
 					else {
@@ -47,7 +47,7 @@ void Ass(char* path_in, char* path_out) {
 
 						if(count && str_r) {
 							value = str_r[0] - 'A';
-							mode = 1;
+							mode = reg_mode;
 						}
 					}	
 				}
