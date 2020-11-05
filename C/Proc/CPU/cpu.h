@@ -11,10 +11,11 @@
 #define N_TAGS 10
 
 extern const char* path_logs_cpu;
-extern const int INIT_CPU;
 extern const double delta;
+extern const char COLORS[10][10];
 
 struct Struct_CPU {
+	int color;
 	size_t counter_RAM;
 	double* RAM;
 	size_t version;
