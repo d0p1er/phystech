@@ -1,205 +1,420 @@
 #include "list.h"
 
-const int poison = 0xDEADBEEF;
+const TYPE_LIST poison = (TYPE_LIST) 0xDEADBEEF;
 
-struct List ListConstruct() {
-	struct List list = {};
-	list.capacity = 32;
-	list.size = 0;
-	list.free = 1;
+void ListConstruct(struct List* list) {
+	list->capacity = 16;
+	list->size = 0;
+	list->free = 1;
 
-	list.values = (int*) calloc(list.capacity, sizeof(list.values[0]));
-	list.next =   (int*) calloc(list.capacity, sizeof(list.values[0]));
-	list.prev =   (int*) calloc(list.capacity, sizeof(list.values[0]));
+	list->nodes = (struct NodeList*) calloc(list->capacity, sizeof(list->nodes[0]));
+
+	list->nodes[0].value = 0;
+	list->nodes[0].next  = 0;
+	list->nodes[0].prev  = 0;
+
+	for (size_t i = 1; i < list->capacity; i++) {
+		list->nodes[i].value = poison;
+		list->nodes[i].next  = i + 1;
+		list->nodes[i].prev  = i - 1;
+	}
+
+	list->nodes[list->capacity - 1].next = 0;
+	list->nodes[1].prev = 0;
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+}
+
+
+void ListDestruct(struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	free(list->nodes);
+	list->nodes = NULL;
+	list->size = 0;
 	
-	list.values[0] = 0;
-	list.next[0]   = 0;
-	list.prev[0]   = 0;
-
-	for (size_t i = 1; i < list.capacity; i++) {
-		list.values[i] = poison;
-		list.next[i]   = i + 1;
-		list.prev[i]   = i - 1;
-	}
-
-	list.next[list.capacity - 1] = 0;
-	list.prev[1] = 0;
-
-	return list;
 }
 
 
-void AddValue(int pos, int value, struct List* list) {
-	if (list->values[pos] == poison) {
-		
-		list->values[pos] = value;
+int AddValueBefore(TYPE_LIST value, struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
 
-		if (pos != list->free) {
-			list->next[list->prev[pos]] = list->next[pos];
-			list->prev[list->next[pos]] = list->prev[pos];
-		}
-		else {
-			list->prev[list->next[pos]] = 0;
-			list->free = list->next[list->free];
-		}
+	int new_pos = 0;
 
-		list->next[list->tail] = pos;
-		list->next[pos] = 0;
-		list->prev[pos] = list->tail;
+	if (list->size == 0)
+		new_pos = AddZeroSize(value, list);
 
-		list->next[0] = 0;
-		list->prev[0] = 0;
-
-		list->tail = pos;
-		if (list->size == 0)
-			list->head = pos;
-		
-		list->size++;
-	}
 	else {
-		int new_pos = list->free;
-		list->free = list->next[list->free];
+		if (list->size == list->capacity - 2) {
+			// PrintAll(list);
+			ResizeUp(list);
+		}
 
-		list->values[new_pos] = list->values[pos];
-		list->values[pos] = value;
+		new_pos = list->free;
+		list->free = list->nodes[new_pos].next;
 
-		list->next[new_pos] = list->next[pos];
-		list->next[list->prev[pos]] = new_pos;
-		list->next[list->tail] = pos;
+		list->nodes[new_pos].value = value;
 		
-		list->prev[new_pos] = list->prev[pos];
-		list->prev[list->next[pos]] = new_pos;
-
-		list->next[pos] = 0;
-		list->prev[pos] = list->tail;
+		list->nodes[new_pos].next = list->head;
+		list->nodes[new_pos].prev = 0;
 		
-		list->next[0] = 0;
-		list->prev[0] = 0;
+		list->nodes[list->head].prev = new_pos;
 
-		list->tail = pos;
-		list->size++;
-	}	
+		list->head = new_pos;
+	}
+
+	list->size++;
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	return new_pos;
 }
 
-int Delete(int pos, struct List* list) {
-	int val = list->values[pos];
-	list->values[pos] = poison;
+
+
+int AddValueAfter(TYPE_LIST value, struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	int new_pos = 0;
+
+	if (list->size == 0)
+		new_pos = AddZeroSize(value, list);
+
+	else {
+		if (list->size == list->capacity - 2) {
+			// PrintAll(list);
+			ResizeUp(list);
+		}
+
+		new_pos = list->free;
+		list->free = list->nodes[new_pos].next;
+
+		list->nodes[new_pos].value = value;
+		
+		list->nodes[list->tail].next = new_pos;
+		list->nodes[new_pos].next = 0;
+		
+		list->nodes[new_pos].prev = list->tail;
+
+		list->tail = new_pos;
+	}
+
+	list->size++;
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	return new_pos;
+}
+
+
+int AddZeroSize(TYPE_LIST value, struct List* list) {
+	int pos = list->free;
+	list->free = list->nodes[list->free].next;
+
+	list->nodes[pos].value = value;
+	list->nodes[pos].next = 0;
+	list->nodes[pos].prev = 0;
+
+	list->head = pos;
+	list->tail = pos;
+
+	return pos;
+}
+
+TYPE_LIST Delete(int pos, struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	TYPE_LIST val = list->nodes[pos].value;
+	list->nodes[pos].value = poison;
 	list->size--;
 
 	if (list->size == 1) {
-		list->next[pos] = list->free;
-		list->prev[pos] = 0;
+		list->nodes[pos].next = list->free;
+		list->nodes[pos].prev = 0;
 
-		list->prev[list->free] = pos;
+		list->nodes[list->free].prev = pos;
 		list->free = pos;
 
 		return val;
 	}
 
 	if (pos == list->head) {
-		list->head = list->next[pos];
-		list->prev[list->next[pos]] = 0;
+		list->head = list->nodes[pos].next;
+		list->nodes[list->nodes[pos].next].prev = 0;
 
-		UpdateFree
+		UpdateFree(pos, list);
 
 		return val;
 
 	}
 
 	if (pos == list->tail) {
-		list->tail = list->prev[pos];
-		list->next[list->prev[pos]] = 0;
+		list->tail = list->nodes[pos].prev;
+		list->nodes[list->nodes[pos].prev].next = 0;
 
-		UpdateFree
+		UpdateFree(pos, list);
 
 		return val;
 	}
 
-	list->next[list->prev[pos]] = list->next[pos];
-	list->prev[list->next[pos]] = list->prev[pos];
+	list->nodes[list->nodes[pos].prev].next = list->nodes[pos].next;
+	list->nodes[list->nodes[pos].next].prev = list->nodes[pos].prev;
 
-	UpdateFree
+	UpdateFree(pos, list);
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
 
 	return val;
 }
 
+
+void UpdateFree(int pos, struct List* list) {
+	list->nodes[pos].next = list->free;
+	list->nodes[pos].prev = 0;
+	list->nodes[list->free].prev = pos;
+	list->free = pos;
+}
+
+
+void ResizeUp(struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	list->nodes[list->free].next = list->capacity;
+	list->capacity *= 2;
+
+	list->nodes = (struct NodeList*) realloc(list->nodes, list->capacity * sizeof(list->nodes[0]));
+
+	for (size_t i = list->size + 2; i < list->capacity; i++) {
+		list->nodes[i].value = poison;
+		list->nodes[i].next  = i + 1;
+		list->nodes[i].prev  = i - 1;
+	}
+
+
+	list->nodes[list->capacity - 1].next = 0;
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	// PrintAll(list);
+}
+
+
+int FindElem(int pos, struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	TYPE_LIST value = GetValue(pos, list);
+	int new_pos = FindElemByValue(value, list);
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	return new_pos;
+}
+
+
+int FindElemByValue(TYPE_LIST value, struct List* list) {
+	for (size_t i = 0; i < list->capacity; i++)
+		if (list->nodes[i].value == value)
+			return i;
+}
+
+
+TYPE_LIST GetValue(int pos, struct List* list) {
+	int curr_pos = list->head;
+
+	for (size_t i = 0; i < pos; i++)
+		curr_pos = list->nodes[curr_pos].next;
+
+	return list->nodes[curr_pos].value;
+}
+
+
+void Sort(struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	int pos = list->head;
+	struct NodeList tmp_node = {};
+	int tmp_pos = 0;
+
+	for (size_t i = 1; i < list->size + 1; i++) {
+		tmp_node = list->nodes[i];
+		tmp_pos = list->nodes[pos].next;
+
+		list->nodes[i] = list->nodes[pos];
+		Swap(i, list);
+		list->nodes[i].prev = i - 1;
+		list->nodes[i].next = i + 1;
+
+		list->nodes[pos] = tmp_node;
+
+		// printf("%d\n", list->nodes[i].next);
+		// printf("%d\n", list->nodes[pos].next);
+
+		Swap(pos, list);
+
+		if (list->nodes[i].prev == 0)
+			list->head = i;
+		if (list->nodes[i].next == 0)
+			list->tail = i;
+
+		pos = tmp_pos;
+	}
+
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+}
+
+
+void Swap(int pos, struct List* list) {
+	if (list->nodes[pos].prev != 0 && list->nodes[pos].next != 0) {
+		list->nodes[list->nodes[pos].prev].next = pos;
+		list->nodes[list->nodes[pos].next].prev = pos;
+	}
+	else if (list->nodes[pos].prev == 0 && list->nodes[pos].next != 0) {
+		list->nodes[list->nodes[pos].next].prev = pos;
+	}
+	else if (list->nodes[pos].prev != 0 && list->nodes[pos].next == 0) {
+		list->nodes[list->nodes[pos].prev].next = pos;
+	}
+}
+
 int Verification(struct List* list) {
-	int pos = list->next[list->head];
+	int pos = list->nodes[list->head].next;
+
 	if (list->size > 2) {
 		for (size_t i = 1; i < list->size - 1; i++) {
-		printf("pos %d\n", pos);
-		printf("prev next %d\n", list->prev[list->next[pos]]);
-		printf("next prev %d\n", list->next[list->prev[pos]]);
-		if (list->prev[list->next[pos]] != list->next[list->prev[pos]]) 
+		if (list->nodes[list->nodes[pos].next].prev != list->nodes[list->nodes[pos].prev].next) 
 			return NEXT_PREV_ERROR;
 
-		pos = list->next[pos];
+		pos = list->nodes[pos].next;
 		}
 	}
-	
 
-	pos = list->next[list->head];
-	for (size_t i = 0; i < list->size; i++)
-		pos = list->next[pos];
+
+	pos = list->head;
+	for (size_t i = 0; i < list->size; i++) {
+		if (pos == 0)
+			return NEXT_ERROR;
+
+		pos = list->nodes[pos].next;
+	}
 
 	if (pos != 0)
 		return NEXT_ERROR;
 
-	pos = list->prev[list->tail];
-	for (size_t i = 0; i < list->size; i++) 
-		pos = list->prev[pos];
+
+	pos = list->tail;
+	for (size_t i = 0; i < list->size; i++) {
+		if (pos == 0)
+			return PREV_ERROR;
+
+		pos = list->nodes[pos].prev;
+	} 
 
 	if (pos != 0)
 		return PREV_ERROR;
+
+
+	size_t counter = 0;
+	for (size_t i = 1; i < list->capacity; i++) {
+		if (list->nodes[i].value != poison)
+			counter++;
+	}
+	if (counter != list->size)
+		return WRONG_SIZE;
 
 	return EVERYTHING_OKAY;
 }
 
 
-void DrawGraph(struct List* list) {
-	FILE* graph_file = fopen("graph.gv", "w");
+void DumpList(struct List* list, const char* func, const int line) {
+	int error = Verification(list);
 
-	fprintf(graph_file, "digraph List {");
+	switch (error) {
+		case EVERYTHING_OKAY: 	PrintErrorLogs("ok", func, line, EVERYTHING_OKAY); 					break;
+		case NEXT_PREV_ERROR: 	PrintErrorLogs("NEXT PREV ERROR", func, line, NEXT_PREV_ERROR); 	break;
+		case NEXT_ERROR: 		PrintErrorLogs("NEXT ERROR", func, line, NEXT_ERROR);				break;
+		case PREV_ERROR:		PrintErrorLogs("PREV ERROR", func, line, PREV_ERROR);				break;
+		case WRONG_SIZE:		PrintErrorLogs("WRONG SIZE", func, line, WRONG_SIZE);				break;
+		default:				PrintErrorLogs("UNKNOWN ERROR", func, line, error);					break; 
+	}
+}
+
+
+void PrintErrorLogs(const char* error, const char* func, const int line, const int error_number) {
+	if(error != "ok")
+		printf("ERROR[%d] %s CHECK LOGS\n", error_number, error);
+
+	FILE* logs_file = fopen("logs.txt", "a");
+
+	char* timeNow = TimeNow();
+
+	fprintf(logs_file, "\n##########################################################################################\n");
+	fprintf(logs_file, "[%s]\nList [%d] %s in %s on line %d\n", timeNow, error_number, error, func, line);
+
+	fclose(logs_file);
+}
+
+
+char* TimeNow() {
+	char* s = (char*) calloc(20, sizeof(s[0]));
+
+	time_t t = time(NULL);
+	struct tm* tt = localtime(&t);
+
+	strftime(s, 20, "%d.%m.%Y %H:%M:%S ", tt);
+
+	return s;
+}
+
+
+void DrawGraphList(struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
+	FILE* graph_file = fopen("Data/graph.gv", "w");
+
+	fprintf(graph_file, "digraph List {\n 	");
 
 	int pos = list->head;
 	for (size_t i = 0; i < list->size; i++) {
-		fprintf(graph_file, "	box%d [shape=\"record\", fillcolor = chartreuse, style = filled, label = \"{<value>%d|{<prev> %d|<pos> %d|<next> %d}}\"];\n", pos, list->values[pos], list->prev[pos], pos, list->next[pos]);
-		fprintf(graph_file, "	box%d:prev -> box%d:pos;\n", pos, list->prev[pos]);
-		fprintf(graph_file, "	box%d:next -> box%d:value;\n", pos, list->next[pos]);
+		if (pos == 0)
+			continue;
+		fprintf(graph_file, "	box%d [shape=\"record\", fillcolor = chartreuse, style = filled, label = \"{<value>"OUTPUT_FORMAT_LIST"|{<prev> %d|<pos> %d|<next> %d}}\"];\n", pos, list->nodes[pos].value, list->nodes[pos].prev, pos, list->nodes[pos].next);
+		fprintf(graph_file, "	box%d:pos -> box%d:value [dir=both];\n", pos, list->nodes[pos].next);
 
-		pos = list->next[pos];
+		pos = list->nodes[pos].next;
 	}
 
 	pos = list->free;
-	for (size_t i = 0; i < list->capacity - list->size - 1; i++) {
-		fprintf(graph_file, "	box%d [shape=\"record\", fillcolor = red, style = filled, label = \"{<value>%d|{<prev> %d|<pos> %d|<next> %d}}\"];\n", pos, list->values[pos], list->prev[pos], pos, list->next[pos]);
-		fprintf(graph_file, "	box%d:prev -> box%d:pos;\n", pos, list->prev[pos]);
-		fprintf(graph_file, "	box%d:next -> box%d:value;\n", pos, list->next[pos]);
+	for (size_t i = 1; i < list->capacity - list->size; i++) {
+		fprintf(graph_file, "	box%d [shape=\"record\", fillcolor = red, style = filled, label = \"{<value>"OUTPUT_FORMAT_LIST"|{<prev> %d|<pos> %d|<next> %d}}\"];\n", pos, list->nodes[pos].value, list->nodes[pos].prev, pos, list->nodes[pos].next);
+		fprintf(graph_file, "	box%d:pos -> box%d:value [dir=both];\n", pos, list->nodes[pos].next);
 
-		pos = list->next[pos];
+		pos = list->nodes[pos].next;
 	}
 
 	fprintf(graph_file, "}\n");
 	
 	fclose(graph_file);
 
-	system("dot -Tpng graph.gv -o list.png");
+	system("dot -Tpng Data/graph.gv -o Data/list.png");
 }
 
-void PrintAll(struct List* list) {
+
+void PrintAllList(struct List* list) {
+	DBG DumpList(list, __FUNCTION__, __LINE__);
+
 	printf("values : ");
 	for (size_t i = 0; i < list->capacity; i++)
-		printf("%d ", list->values[i]);
+		printf(OUTPUT_FORMAT_LIST" ", list->nodes[i].value);
 
 	printf("\n");
 	printf("next : ");
 	for (size_t i = 0; i < list->capacity; i++)
-		printf("%d ", list->next[i]);
+		printf("%d ", list->nodes[i].next);
 
 	printf("\n");
 	printf("prev : ");
 	for (size_t i = 0; i < list->capacity; i++)
-		printf("%d ", list->prev[i]);
+		printf("%d ", list->nodes[i].prev);
 
 	printf("\n");
 }
