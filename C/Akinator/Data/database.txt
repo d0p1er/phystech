@@ -1,0 +1,129 @@
+[
+    ?alife?
+        [
+            ?animal?
+                [
+                    ?associated with FOPF?
+                        [
+                            `rat`
+                        ]
+                        [
+                            ?associated with RT! RT! RT!?
+                                [
+                                    `Poltarashka`
+                                ]
+                                [
+                                    ?associated with BM?
+                                        [
+                                            ?associated with microbiology?
+                                                [
+                                                    ?also autotroph?
+                                                        [
+                                                            `euglena green`
+                                                        ]
+                                                        [
+                                                            `infusore allesi`
+                                                        ]
+                                                ]
+                                                [
+                                                    `fruit fly`
+                                                ]
+                                        ]
+                                        [
+                                            ?symbol of wild life?
+                                                [
+                                                    `wolf`
+                                                ]
+                                                [
+                                                    `dog`
+                                                ]
+                                        ]
+                                ]
+                        ]
+                ]
+                [
+                    ?sometimes sleep?
+                        [
+                            `not a phystech`
+                        ]
+                        [
+                            ?participated in initiation in RT student?
+                                [
+                                    ?hanging out until next morning?
+                                        [
+                                            `otec goda`
+                                        ]
+                                        [
+                                            ?having a specific kind of arm hook?
+                                                [
+                                                    `Dolgodvorov Egor`
+                                                ]
+                                                [
+                                                     ?having infinity initiation resources?
+                                                        [
+                                                            `Mark`
+                                                        ]
+                                                        [
+                                                            `Ivan`
+                                                        ]
+                                                ]
+                                        ]
+                                ]
+                                [
+                                    ?associated with infromatics?
+                                        [
+                                            ?have lectures?
+                                                [
+                                                    ?his lectures compulsory but not recomended?
+                                                        [
+                                                            `Podlesnyh`
+                                                        ]
+                                                        [
+                                                            `Ded`
+                                                        ]
+                                                ]
+                                                [
+                                                    `Vladimirov`
+                                                ]
+                                        ]
+                                        [
+                                            ?associated with maths?
+                                                [
+                                                    ?eat cereal?
+                                                        [
+                                                            `Chubarov`
+                                                        ]
+                                                        [
+                                                            `Znamenskaya`
+                                                        ]
+                                                ]
+                                                [
+                                                    `Ovchinkin`
+                                                ]
+                                        ]
+                                ]
+                        ]
+                ]
+        ]
+        [
+            ?green?
+                [
+                    ?have glass bottle in hand?
+                        [
+                            `overdrunked student`
+                        ]
+                        [
+                            `green hall`
+                        ]
+                ]
+                [
+                    ?having lots of benches?
+                        [
+                            `NK square`
+                        ]
+                        [
+                            `Gorshok`
+                        ]
+                ]
+        ]
+]
