@@ -34,6 +34,8 @@ struct Variable {
 
 void ReadMathExpression(struct NodeTree* node, char* path);
 char* ReadExpr(struct NodeTree* node, char* text);
+char* WriteNodeTreeData(struct NodeTree* node, char* text, char end);
+int IsOper(char c);
 double Eval(struct NodeTree* node);
 char* WithoutSpaces(char* str, size_t lenght);
 void PrintExpr(struct NodeTree* node);
