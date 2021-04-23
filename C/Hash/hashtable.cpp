@@ -19,20 +19,17 @@ void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*)
 		unsigned int tmp_hash = (*HashFunc)(data->pointers[i]);
 		// printf("tmp hash : %d\n", tmp_hash);
 
-		auto iter = hash_table->cells.find(tmp_hash);
+		auto iter = hash_table->list.find(tmp_hash);
 		// printf("check : %d\n", check);
 
-		if (iter == hash_table->cells.end()) {
-			struct CellHashTable tmp_cell = {};
-			tmp_cell.capacity = 2;
-			tmp_cell.size = 1;
-			tmp_cell.list = {};
-			ListConstruct(&(tmp_cell.list));
-			AddValueAfter(data->pointers[i], &(tmp_cell.list));
+		if (iter == hash_table->list.end()) {
+			struct List list = {};
+			ListConstruct(&list);
+			AddValueAfter(data->pointers[i], &list);
 
 			// tmp_cell.list[0] = data->pointers[i];
 
-			hash_table->cells.insert(make_pair(tmp_hash, tmp_cell));
+			hash_table->list.insert(make_pair(tmp_hash, list));
 
 			hash_table->size++;
 			// printf("%ld %ld\n", hash_table->cells[check].size, hash_table->cells[check].capacity);			
@@ -41,11 +38,11 @@ void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*)
 			// if (hash_table->cells[tmp_hash].size >= hash_table->cells[tmp_hash].capacity)
 			// 	ResizeList(hash_table, tmp_hash);
 
-			AddValueAfter(data->pointers[i], &(hash_table->cells[tmp_hash].list));
+			AddValueAfter(data->pointers[i], &(hash_table->list[tmp_hash]));
 
 			// hash_table->cells[tmp_hash].list[hash_table->cells[tmp_hash].size] = data->pointers[i];
 			// printf("11111\n");
-			hash_table->cells[tmp_hash].size++;
+			// hash_table->cells[tmp_hash].size++;
 		}
 	}
 }
@@ -56,13 +53,13 @@ void WriteData(struct HashTable* hash_table) {
 
 	printf("%ld\n", hash_table->size);
 
-	for (auto iter = hash_table->cells.begin(); iter != hash_table->cells.end(); iter++) {
+	for (auto iter = hash_table->list.begin(); iter != hash_table->list.end(); iter++) {
 		fprintf(f, "%d ", iter->first);
 	}
 
 	fprintf(f, "\n");
 
-	for (auto iter = hash_table->cells.begin(); iter != hash_table->cells.end(); iter++) {
+	for (auto iter = hash_table->list.begin(); iter != hash_table->list.end(); iter++) {
 		fprintf(f, "%ld ", iter->second.size);
 	}
 }

@@ -32,32 +32,32 @@ unsigned int Hash3(char* str) {
 	return (unsigned int) (sum_ascii / counter);
 }
 
-// unsigned int Hash4(char* data) {
-// 	const unsigned int Polynomial = 0xEDB88320;
-// 	unsigned int crc = 0;
-// 	// unsigned char* current = (unsigned char*) data;
-// 	size_t length = 32;
-// 	while (length--) {
-// 		crc ^= *data++;
+unsigned int Hash4(char* data) {
+	const unsigned int Polynomial = 0xEDB88320;
+	unsigned int crc = 0;
+	// unsigned char* current = (unsigned char*) data;
+	size_t length = 32;
+	while (length--) {
+		crc ^= *data++;
 
-// 		for (unsigned int j = 0; j < 8; j++)
-// 			crc = (crc >> 1) ^ (-int(crc & 1) & Polynomial);
-// 	}
-
-// 	return crc; // same as crc ^ 0xFFFFFFFF 
-// } 
-
-
-unsigned int Hash4(char* str){
-	unsigned int hash = 0;
-	// size_t len = strlen(str);
-	for (size_t i = 0; i < 32; ++i) {
-		hash = _mm_crc32_u32(hash, *str);
-		str++;
+		for (unsigned int j = 0; j < 8; j++)
+			crc = (crc >> 1) ^ (-int(crc & 1) & Polynomial);
 	}
 
-	return hash;
-}
+	return crc; // same as crc ^ 0xFFFFFFFF 
+} 
+
+
+// unsigned int Hash4(char* str){
+// 	unsigned int hash = 0;
+// 	// size_t len = strlen(str);
+// 	for (size_t i = 0; i < 32; ++i) {
+// 		hash = _mm_crc32_u32(hash, *str);
+// 		str++;
+// 	}
+
+// 	return hash;
+// }
 	
 
 unsigned int Hash5(char* str) {

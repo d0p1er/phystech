@@ -25,16 +25,16 @@ using namespace std;
 	#define DBG
 #endif
 
-struct CellHashTable {
-	size_t size;
-	size_t capacity;
-	struct List list;
-};
+// struct CellHashTable {
+// 	size_t size;
+// 	size_t capacity;
+// 	struct List list;
+// };
 
 struct HashTable {
 	size_t size;
 	size_t capacity;
-	map <unsigned int, struct CellHashTable> cells;
+	map <unsigned int, struct List> list;
 };
 
 void HashTableConstruct(struct HashTable* hash_table);
