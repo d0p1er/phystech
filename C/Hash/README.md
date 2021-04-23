@@ -98,6 +98,6 @@ unsigned int Hash4(char* str){
 ![valg_map.jpg](Images/valg_map_intr.jpg)
 ![map.jpg](Images/map_intr.jpg)
 
-It made the program 25% faster. Awesome!!!
+It made the program 35% faster. Awesome!!!
 
-In the end, it was possible to speed up the project 140 times.
+In the end, it was possible to speed up the project 150 times.
