@@ -15,5 +15,5 @@ First of all, this project involves comparing 6 hash functions. And in the secon
 
 The first idea was to use common hash table looked something like this:
 
-![struct1.png](/Images/struct1.png)
+![struct1.png](Images/struct1.png)
 
