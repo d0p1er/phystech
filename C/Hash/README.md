@@ -15,5 +15,5 @@ First of all, this project involves comparing 6 hash functions. And in the secon
 
 The first idea was to use common hash table looked something like this:
 
-![Hash table structure](https://github.com/d0p1er/phystech/tree/master/C/Hash/Images/struct1.png?raw=true)
+![Hash table structure](https://github.com/d0p1er/phystech/tree/master/C/Hash/Images/struct1.png)
 
