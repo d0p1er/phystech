@@ -212,9 +212,17 @@ int FindElem(int pos, struct List* list) {
 
 
 int FindElemByValue(TYPE_LIST value, struct List* list) {
-	for (size_t i = 0; i < list->capacity; i++)
-		if (list->nodes[i].value == value)
-			return i;
+	int pos = list->head;
+	if (!strcmp(list->nodes[pos].value, value))
+		return pos;
+
+	while (list->nodes[pos].next != 0) {
+		pos = list->nodes[pos].next;
+		if (!strcmp(list->nodes[pos].value, value))
+			return pos;
+	}
+
+	return -1;
 }
 
 
@@ -228,59 +236,59 @@ TYPE_LIST GetValue(int pos, struct List* list) {
 }
 
 
-void Sort(struct List* list) {
-	DBG DumpList(list, __FUNCTION__, __LINE__);
+// void Sort(struct List* list) {
+// 	DBG DumpList(list, __FUNCTION__, __LINE__);
 
-	int pos = list->head;
-	struct NodeList tmp_node = {};
-	int tmp_pos = 0;
+// 	int pos = list->head;
+// 	struct NodeList tmp_node = {};
+// 	int tmp_pos = 0;
 
-	for (size_t i = 1; i < list->size + 1; i++) {
-		tmp_node = list->nodes[i];
-		tmp_pos = list->nodes[pos].next;
+// 	for (size_t i = 1; i < list->size + 1; i++) {
+// 		tmp_node = list->nodes[i];
+// 		tmp_pos = list->nodes[pos].next;
 
-		list->nodes[i] = list->nodes[pos];
+// 		list->nodes[i] = list->nodes[pos];
 		
-		Swap(i, list);
+// 		Swap(i, list);
 
 
 
-		list->nodes[pos] = tmp_node;
+// 		list->nodes[pos] = tmp_node;
 
-		// printf("%d\n", list->nodes[i].next);
-		// printf("%d\n", list->nodes[pos].next);
+// 		// printf("%d\n", list->nodes[i].next);
+// 		// printf("%d\n", list->nodes[pos].next);
 
-		Swap(pos, list);
+// 		Swap(pos, list);
 
 		
 
-		if (list->nodes[i].prev == 0)
-			list->head = i;
-		if (list->nodes[i].next == 0)
-			list->tail = i;
+// 		if (list->nodes[i].prev == 0)
+// 			list->head = i;
+// 		if (list->nodes[i].next == 0)
+// 			list->tail = i;
 
-		list->nodes[i].prev = i - 1;
-		list->nodes[i].next = i + 1;
+// 		list->nodes[i].prev = i - 1;
+// 		list->nodes[i].next = i + 1;
 
-		pos = tmp_pos;
-	}
+// 		pos = tmp_pos;
+// 	}
 
-	DBG DumpList(list, __FUNCTION__, __LINE__);
-}
+// 	DBG DumpList(list, __FUNCTION__, __LINE__);
+// }
 
 
-void Swap(int pos, struct List* list) {
-	if (list->nodes[pos].prev != 0 && list->nodes[pos].next != 0) {
-		list->nodes[list->nodes[pos].prev].next = pos;
-		list->nodes[list->nodes[pos].next].prev = pos;
-	}
-	else if (list->nodes[pos].prev == 0 && list->nodes[pos].next != 0) {
-		list->nodes[list->nodes[pos].next].prev = pos;
-	}
-	else if (list->nodes[pos].prev != 0 && list->nodes[pos].next == 0) {
-		list->nodes[list->nodes[pos].prev].next = pos;
-	}
-}
+// void Swap(int pos, struct List* list) {
+// 	if (list->nodes[pos].prev != 0 && list->nodes[pos].next != 0) {
+// 		list->nodes[list->nodes[pos].prev].next = pos;
+// 		list->nodes[list->nodes[pos].next].prev = pos;
+// 	}
+// 	else if (list->nodes[pos].prev == 0 && list->nodes[pos].next != 0) {
+// 		list->nodes[list->nodes[pos].next].prev = pos;
+// 	}
+// 	else if (list->nodes[pos].prev != 0 && list->nodes[pos].next == 0) {
+// 		list->nodes[list->nodes[pos].prev].next = pos;
+// 	}
+// }
 
 int Verification(struct List* list) {
 	int pos = list->nodes[list->head].next;

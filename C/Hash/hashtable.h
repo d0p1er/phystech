@@ -25,16 +25,15 @@ using namespace std;
 	#define DBG
 #endif
 
-// struct CellHashTable {
-// 	size_t size;
-// 	size_t capacity;
-// 	struct List list;
-// };
+struct CellHashTable {
+	unsigned int hash_value;
+	struct List list;
+};
 
 struct HashTable {
 	size_t size;
 	size_t capacity;
-	map <unsigned int, struct List> list;
+	struct CellHashTable* cells;
 };
 
 void HashTableConstruct(struct HashTable* hash_table);
@@ -43,8 +42,8 @@ void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*)
 void ResizeList(struct HashTable* hash_table, unsigned int hash);
 // void ResizeTable(struct HashTable* hash_table);
 void WriteData(struct HashTable* hash_table);
-
-
+// size_t FindFree(struct HashTable* hash_table, size_t iter);
+TYPE_LIST FindHash(struct HashTable* hash_table, TYPE_LIST s, unsigned int (*HashFunc)(char*));
 
 // //--------------------------------------------------
 // // HASHTABLE BASED ON ARR

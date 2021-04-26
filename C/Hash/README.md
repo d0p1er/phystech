@@ -20,7 +20,7 @@ The first idea was to use common hash table looked something like this:
 
 ```
 struct CellHashTable {
-	unsigned long long hash_value;
+	unsigned int hash_value;
 	struct List list;
 };
 
@@ -31,39 +31,12 @@ struct HashTable {
 };
 ```
 
-But after I decided to use different structure based on map:
-```
-struct HashTable {
-	size_t size;
-	size_t capacity;
-	map <unsigned long long, struct List> cells;
-};
-```
-
-Because I thought it would be easier and more beautiful. And it really made the program run faster))).
-
-Before:
-![arr_long_long.png](Images/arr_long_long.jpg)
-After:
-![map_long_long.png](Images/map_long_long.jpg)
-
-This made the program 100 times faster.
-![fine.jpg](Images/fine.jpg)
-
-I understood that using unsigned long long wasn't a good idea because it took up a lot of memory and max hash_value ~ 10^9 and I can use unsigned int
-
-![map.jpg](Images/map.jpg)
-It made the program 11% faster. That's good.
-
 <a name="opt"></a>
-## 2. Optimization
+## 3. Optimization
 
-Now profiling starts.
-I use valgrind to profile my project.
+Function Hash4 took a lot of program's running time and I decided to rewrite it with SSE :
 
-![valg_map.jpg](Images/valg_map.jpg)
-
-I see that Hash4() takes about 40% of the program's running time:
+Before :
 
 ```
 unsigned int Hash4(char* data) {
@@ -78,10 +51,18 @@ unsigned int Hash4(char* data) {
 	}
 
 	return crc;
-}
+} 
 ```
 
-And I decided to rewrite the function with SSE:
+![new_time.jpg](Images/new_time.jpg)
+
+![new.jpg](Images/new.jpg)
+
+After:
+
+![new_time.jpg](Images/new_intr_time.jpg)
+
+![new.jpg](Images/new_intr.jpg)
 
 ```
 unsigned int Hash4(char* str){
@@ -95,9 +76,6 @@ unsigned int Hash4(char* str){
 }
 ```
 
-![valg_map.jpg](Images/valg_map_intr.jpg)
-![map.jpg](Images/map_intr.jpg)
+It made the program 331% faster
 
-It made the program 35% faster. Awesome!!!
-
-In the end, it was possible to speed up the project 150 times.
+![fine.jpg](Images/fine.jpg)

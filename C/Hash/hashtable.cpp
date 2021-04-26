@@ -6,10 +6,17 @@
 
 const unsigned int poison_hash = (unsigned int) 0xDEADBEEF;
 char* OUTPUT_DATA = "Data/output4";
+size_t SIZE_HASHTABLE = 371663;
 
 void HashTableConstruct(struct HashTable* hash_table) {
-	hash_table->capacity = 1;
+	hash_table->capacity = SIZE_HASHTABLE;
 	hash_table->size = 0;
+
+	hash_table->cells = (struct CellHashTable*) calloc(SIZE_HASHTABLE, sizeof(hash_table->cells[0]));
+
+	for (size_t i = 0; i < SIZE_HASHTABLE; i++) {
+		ListConstruct(&(hash_table->cells[i].list));
+	}
 }
 
 void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*), struct Text* data) {
@@ -19,31 +26,55 @@ void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*)
 		unsigned int tmp_hash = (*HashFunc)(data->pointers[i]);
 		// printf("tmp hash : %d\n", tmp_hash);
 
-		auto iter = hash_table->list.find(tmp_hash);
+		size_t iter = (size_t) tmp_hash % SIZE_HASHTABLE;
 		// printf("check : %d\n", check);
-
-		if (iter == hash_table->list.end()) {
-			struct List list = {};
-			ListConstruct(&list);
-			AddValueAfter(data->pointers[i], &list);
-
-			// tmp_cell.list[0] = data->pointers[i];
-
-			hash_table->list.insert(make_pair(tmp_hash, list));
-
+		if (hash_table->cells[iter].list.size == 0) {
+			AddValueAfter(data->pointers[i], &(hash_table->cells[iter].list));
 			hash_table->size++;
-			// printf("%ld %ld\n", hash_table->cells[check].size, hash_table->cells[check].capacity);			
 		}
 		else {
-			// if (hash_table->cells[tmp_hash].size >= hash_table->cells[tmp_hash].capacity)
-			// 	ResizeList(hash_table, tmp_hash);
-
-			AddValueAfter(data->pointers[i], &(hash_table->list[tmp_hash]));
-
-			// hash_table->cells[tmp_hash].list[hash_table->cells[tmp_hash].size] = data->pointers[i];
-			// printf("11111\n");
-			// hash_table->cells[tmp_hash].size++;
+			// if (hash_table->cells[iter].hash_value == tmp_hash)
+			AddValueAfter(data->pointers[i], &(hash_table->cells[iter].list));
+			// else {
+			// 	iter = FindFree(hash_table, iter);
+			// 	hash_table->cells[iter].hash_value = tmp_hash;
+			// 	AddValueAfter(data->pointers[i], &(hash_table->cells[iter].list));
+			// 	hash_table->size++;
+			// }
 		}
+	}
+}
+
+// size_t FindFree(struct HashTable* hash_table, size_t iter) {
+// 	for (size_t i = iter + 1; i < SIZE_HASHTABLE; i++) {
+// 		if (hash_table->cells[i].list.size == 0) {
+// 			return i;
+// 		}
+// 	}
+// 	for (size_t i = 0; i < iter; i++) {
+// 		if (hash_table->cells[i].list.size == 0) {
+// 			return i;
+// 		}
+// 	}
+// 	return -1;
+// }
+
+
+TYPE_LIST FindHash(struct HashTable* hash_table, TYPE_LIST s, unsigned int (*HashFunc)(char*)) {
+	unsigned int hash = (*HashFunc)(s);
+	size_t iter = (size_t) hash % SIZE_HASHTABLE;
+
+	if (hash_table->cells[iter].list.size == 0) {
+		return nullptr;
+	}
+	else {
+		int i = FindElemByValue(s, &(hash_table->cells[iter].list));
+
+		if (i >= 0)
+			return hash_table->cells[iter].list.nodes[i].value;
+		
+		else 
+			return nullptr;
 	}
 }
 
@@ -53,14 +84,14 @@ void WriteData(struct HashTable* hash_table) {
 
 	printf("%ld\n", hash_table->size);
 
-	for (auto iter = hash_table->list.begin(); iter != hash_table->list.end(); iter++) {
-		fprintf(f, "%d ", iter->first);
+	for (size_t i = 0; i < hash_table->capacity; i++) {
+		fprintf(f, "%d ", hash_table->cells[i].hash_value);
 	}
 
 	fprintf(f, "\n");
 
-	for (auto iter = hash_table->list.begin(); iter != hash_table->list.end(); iter++) {
-		fprintf(f, "%ld ", iter->second.size);
+	for (size_t i = 0; i < hash_table->capacity; i++) {
+		fprintf(f, "%ld ", hash_table->cells[i].list.size);
 	}
 }
 
@@ -74,7 +105,7 @@ void WriteData(struct HashTable* hash_table) {
 
 // const unsigned int poison_hash = (unsigned int) 0xDEADBEEF;
 // char* OUTPUT_DATA = "output4";
-// const size_t SIZE_HASHTABLE = 148993;
+// const size_t SIZE_HASHTABLE = 148993;;
 
 // void HashTableConstruct(struct HashTable* hash_table) {
 // 	hash_table->capacity = SIZE_HASHTABLE;
