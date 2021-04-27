@@ -47,16 +47,26 @@ unsigned int Hash3(char* str) {
 // } 
 
 
-unsigned int Hash4(char* str){
-	unsigned int hash = 0;
-	for (size_t i = 0; i < 32; ++i) {
-		hash = _mm_crc32_u32(hash, *str);
-		str++;
-	}
+// unsigned int Hash4(char* str) {
+// 	unsigned int hash = 0;
+// 	// size_t iter = 32 / sizeof(unsigned int);
+// 	for (size_t i = 0; i < 32; ++i) {
+// 		hash = _mm_crc32_u32(hash, *str);
+// 		str ++;
+// 	}
 
-	return hash;
+// 	return hash;
+// }
+
+unsigned int Hash4(char* str) {
+	u_int64_t hash = 0;
+	u_int64_t* M = (u_int64_t*) str;
+	for (u_int32_t i = 0; i < 4; ++i) {
+		hash = _mm_crc32_u64(hash, M[i]);
+	}
+	return (u_int32_t)hash;
 }
-	
+
 
 unsigned int Hash5(char* str) {
 	unsigned int hash_sum = 0;

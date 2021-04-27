@@ -29,12 +29,12 @@ void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*)
 		size_t iter = (size_t) tmp_hash % SIZE_HASHTABLE;
 		// printf("check : %d\n", check);
 		if (hash_table->cells[iter].list.size == 0) {
-			AddValueAfter(data->pointers[i], &(hash_table->cells[iter].list));
+			AddValueAfter((TYPE_LIST) data->pointers[i], &(hash_table->cells[iter].list));
 			hash_table->size++;
 		}
 		else {
-			// if (hash_table->cells[iter].hash_value == tmp_hash)
-			AddValueAfter(data->pointers[i], &(hash_table->cells[iter].list));
+			// if (hash_table->cells[iter].hash_value == tmp_hash
+			AddValueAfter((TYPE_LIST) data->pointers[i], &(hash_table->cells[iter].list));
 			// else {
 			// 	iter = FindFree(hash_table, iter);
 			// 	hash_table->cells[iter].hash_value = tmp_hash;
@@ -61,7 +61,7 @@ void FillHashTable(struct HashTable* hash_table, unsigned int (*HashFunc)(char*)
 
 
 TYPE_LIST FindHash(struct HashTable* hash_table, TYPE_LIST s, unsigned int (*HashFunc)(char*)) {
-	unsigned int hash = (*HashFunc)(s);
+	unsigned int hash = (*HashFunc)((char*) s);
 	size_t iter = (size_t) hash % SIZE_HASHTABLE;
 
 	if (hash_table->cells[iter].list.size == 0) {
@@ -74,6 +74,7 @@ TYPE_LIST FindHash(struct HashTable* hash_table, TYPE_LIST s, unsigned int (*Has
 			return hash_table->cells[iter].list.nodes[i].value;
 		
 		else 
+
 			return nullptr;
 	}
 }

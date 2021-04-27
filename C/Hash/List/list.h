@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <cstring>
+#include <nmmintrin.h>
+#include <xmmintrin.h>
+#include <immintrin.h>
+#include <emmintrin.h>
 
 #pragma once
 
@@ -13,7 +17,7 @@
 	#define DBG
 #endif
 
-typedef char* TYPE_LIST;
+typedef __m256i* TYPE_LIST;
 #define OUTPUT_FORMAT_LIST "%s"
 
 extern const TYPE_LIST poison;

@@ -213,15 +213,25 @@ int FindElem(int pos, struct List* list) {
 
 int FindElemByValue(TYPE_LIST value, struct List* list) {
 	int pos = list->head;
-	if (!strcmp(list->nodes[pos].value, value))
+	// if (!strcmp(list->nodes[pos].value, value))
+	// 	return pos;
+
+	// while (list->nodes[pos].next != 0) {
+	// 	pos = list->nodes[pos].next;
+	// 	if (!strcmp(list->nodes[pos].value, value))
+	// 		return pos;
+	// }
+
+	// return -1;
+
+	if (_mm256_movemask_epi8 (_mm256_cmpeq_epi32 (*(list->nodes[pos].value), *value)) == -1)
 		return pos;
 
 	while (list->nodes[pos].next != 0) {
 		pos = list->nodes[pos].next;
-		if (!strcmp(list->nodes[pos].value, value))
+		if (_mm256_movemask_epi8 (_mm256_cmpeq_epi32 (*(list->nodes[pos].value), *value)) == -1)
 			return pos;
 	}
-
 	return -1;
 }
 

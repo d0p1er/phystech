@@ -8,7 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
-#include <map>
+#include <nmmintrin.h>
+#include <xmmintrin.h>
+#include <immintrin.h>
+#include <emmintrin.h>
 
 #include "Text/Text.h"
 #include "Struct/Struct.h"

@@ -4,6 +4,7 @@
 #include <nmmintrin.h>
 #include <xmmintrin.h>
 #include <immintrin.h>
+#include <emmintrin.h>
 
 unsigned int Hash0(char* str);
 unsigned int Hash1(char* str);

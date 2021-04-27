@@ -5,6 +5,7 @@
 1. [Introduction](#intro)
 2. [Beginning](#begin)
 3. [Optimization](#opt)
+4. [Conclusion](#conc)
 
 <a name="intro"></a>
 ## 1. Introduction
@@ -60,14 +61,10 @@ unsigned int Hash4(char* data) {
 
 After:
 
-![new_time.jpg](Images/new_intr_time.jpg)
-
-![new.jpg](Images/new_intr.jpg)
-
 ```
-unsigned int Hash4(char* str){
+unsigned int Hash4(char* str) {
 	unsigned int hash = 0;
-	for (size_t i = 0; i < 32; ++i) {
+	for (size_t i = 0; i < 8; ++i) {
 		hash = _mm_crc32_u32(hash, *str);
 		str++;
 	}
@@ -76,6 +73,85 @@ unsigned int Hash4(char* str){
 }
 ```
 
+![new_intr_time.jpg](Images/new_intr_time.jpg)
+
+![new_intr.jpg](Images/new_intr.jpg)
+
 It made the program 331% faster
 
 ![fine.jpg](Images/fine.jpg)
+
+I increase the number of cycle passes.
+
+![new_intr_x10_time.jpg](Images/new_intr_x10_time.jpg)
+
+![new_intr_x10.jpg](Images/new_intr_x10.jpg)
+
+We also see that Hash4 takes a lot of program's running time
+
+```
+unsigned int Hash4(char* str) {
+	u_int64_t hash = 0;
+	u_int64_t* data = (u_int64_t*) str;
+	for (u_int32_t i = 0; i < 4; ++i) {
+		hash = _mm_crc32_u64(hash, data[i]);
+	}
+	return (u_int32_t)hash;
+}
+```
+
+![new_intr_64_time.jpg](Images/new_intr_64_time.jpg)
+
+![new_intr_64.jpg](Images/new_intr_64.jpg)
+
+It made the program 217% faster
+
+I saw that strcmp takes about 11% and decided to rewrite it using __m256i* instead of char* :
+
+Before:
+```
+int FindElemByValue(TYPE_LIST value, struct List* list) {
+	int pos = list->head;
+	if (!strcmp(list->nodes[pos].value, value))
+		return pos;
+
+	while (list->nodes[pos].next != 0) {
+		pos = list->nodes[pos].next;
+		if (!strcmp(list->nodes[pos].value, value))
+			return pos;
+	}
+
+	return -1;
+}
+```
+
+After:
+```
+int FindElemByValue(TYPE_LIST value, struct List* list) {
+	int pos = list->head;
+
+	if (_mm256_movemask_epi8 (_mm256_cmpeq_epi32 (*(list->nodes[pos].value), *value)) == -1)
+		return pos;
+
+	while (list->nodes[pos].next != 0) {
+		pos = list->nodes[pos].next;
+		if (_mm256_movemask_epi8 (_mm256_cmpeq_epi32 (*(list->nodes[pos].value), *value)) == -1)
+			return pos;
+	}
+	return -1;
+}
+```
+
+In gave an increase about 67%
+
+![new_intr_strcmp_x10_time.jpg](Images/new_intr_strcmp_x10_time.jpg)
+
+![new_intr_strcmp_x10.jpg](Images/new_intr_strcmp_x10.jpg)
+
+
+<a name="intro"></a>
+## 4. Conclusion
+
+As a result, optimization of the hashtable gave an increase of 22.82 times
+
+That sounds good

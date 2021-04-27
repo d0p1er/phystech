@@ -16,14 +16,14 @@ int main() {
 	char cc[32] = "cc";
 	char dd[32] = "dd";
 
-	for (int i = 0; i < 1000000; i++) {
-		FindHash(&hash_table, aa, Hash4);
+	for (int i = 0; i < 9000000; i++) {
+		FindHash(&hash_table, (__m256i*)aa, Hash4);
 
-		FindHash(&hash_table, bb, Hash4);
+		FindHash(&hash_table, (__m256i*)bb, Hash4);
 
-		FindHash(&hash_table, cc, Hash4);
+		FindHash(&hash_table, (__m256i*)cc, Hash4);
 
-		FindHash(&hash_table, dd, Hash4);
+		FindHash(&hash_table, (__m256i*)dd, Hash4);
 	}
 	
 	printf("22\n");
