@@ -77,7 +77,7 @@ unsigned int Hash4(char* str) {
 
 ![new_intr.jpg](Images/new_intr.jpg)
 
-It made the program 331% faster
+It made the program 85% faster
 
 ![fine.jpg](Images/fine.jpg)
 
@@ -104,7 +104,7 @@ unsigned int Hash4(char* str) {
 
 ![new_intr_64.jpg](Images/new_intr_64.jpg)
 
-It made the program 217% faster
+It made the program 69% faster
 
 I saw that strcmp takes about 11% and decided to rewrite it using __m256i* instead of char* :
 
@@ -142,7 +142,7 @@ int FindElemByValue(TYPE_LIST value, struct List* list) {
 }
 ```
 
-In gave an increase about 67%
+In gave an increase about 40%
 
 ![new_intr_strcmp_x10_time.jpg](Images/new_intr_strcmp_x10_time.jpg)
 
@@ -152,6 +152,6 @@ In gave an increase about 67%
 <a name="intro"></a>
 ## 4. Conclusion
 
-As a result, optimization of the hashtable gave an increase of 22.82 times
+As a result, optimization of the hashtable gave an increase of 4.38 times
 
 That sounds good
