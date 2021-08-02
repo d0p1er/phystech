@@ -63,15 +63,15 @@ If you want to use `void UnitTest(int TestOrNot)` you need to change `const int 
 <a name="ex"></a>
 ## 3. Example:
 
-```zsh
-[out] Saluton mia amiko. This program will help you to solve qudratic equation ax² + bx + c = 0
-[out] Let`s start
+```
+**[out]** Saluton mia amiko. This program will help you to solve qudratic equation ax² + bx + c = 0
+**[out]** Let`s start
 
-[in]  a = 5
-[in]  b = 2
-[in]  c = -2
+**[in]**  a = 5
+**[in]**  b = 2
+**[in]**  c = -2
 
-[out] There are two roots : x1 = 0.463325, x2 = -0.863325
+**[out]** There are two roots : x1 = 0.463325, x2 = -0.863325
 ```
 <a name="intro"></a>
 ## 4. Conclusion
