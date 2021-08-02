@@ -58,22 +58,20 @@ int SolveQE(double a, double b, double c, double* x1, double* x2)
 It compares coefficients with zero to optimize calculations ( in some cases quadratic equation reduces to the linear ), because function of finding sqrt of the discriminant is costly.
 
 Also there are 11 unit tests to check how the program works correctly.
-If you want to use `void UnitTest(int TestOrNot)`{:.C} you need to change `const int TestOrNot`{.C} to 1.
+If you want to use `void UnitTest(int TestOrNot)` you need to change `const int TestOrNot` to 1.
 
 <a name="ex"></a>
 ## 3. Example:
-```
+```bash
 [out] Saluton mia amiko. This program will help you to solve qudratic equation ax² + bx + c = 0
-[out] Let`s start
+[out] Let\`s start
 
 [in]  a = 5
 [in]  b = 2
-[in]  c = -2
+[in]  c = \-2
 
-[out] There are two roots : x1 = 0.463325, x2 = -0.863325
-
+[out] There are two roots : x1 = 0.463325, x2 = \-0.863325
 ```
-
 <a name="intro"></a>
 ## 4. Conclusion
 
