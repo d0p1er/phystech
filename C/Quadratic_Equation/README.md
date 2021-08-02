@@ -18,7 +18,7 @@ The program gives out amount of roots and the roots of equation.
 <a name="how"></a>
 ## 2. How it works
 There is one general function:
-```
+```C
 int SolveQE(double a, double b, double c, double* x1, double* x2)
 	{
 	if(AreNumbersEqual(a, 0))
@@ -58,7 +58,11 @@ int SolveQE(double a, double b, double c, double* x1, double* x2)
 It compares coefficients with zero to optimize calculations ( in some cases quadratic equation reduces to the linear ), because function of finding sqrt of the discriminant is costly.
 
 Also there are 11 unit tests to check how the program works correctly.
-If you want to use ```void UnitTest(int TestOrNot)``` you need to change ```const int TestOrNot``` to 1.
+If you want to use ```void UnitTest(int TestOrNot)``` you need to change 
+```C
+const int TestOrNot
+```
+to 1.
 
 <a name="ex"></a>
 ## 3. Example:
