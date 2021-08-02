@@ -1,2 +1,3 @@
-latex/
+latex/**
+html/**
 Doxyfile
