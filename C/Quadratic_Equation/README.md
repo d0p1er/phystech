@@ -25,11 +25,11 @@ Example:
 Saluton mia amiko. This program will help you to solve qudratic equation ax² + bx + c = 0
 Let`s start
 
-/*[in]*/  a = 5
-/*[in]*/  b = 2
-/*[in]*/  c = -2
+[in]  a = 5
+[in]  b = 2
+[in]  c = -2
 
-/*[out]*/ There are two roots : x1 = 0.463325, x2 = -0.863325
+[out] There are two roots : x1 = 0.463325, x2 = -0.863325
 
 ```
 
