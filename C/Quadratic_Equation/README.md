@@ -11,8 +11,11 @@
 ## 1. Introduction
 
 It's my first C project in MIPT. So don't judge harshly and treat with understanding.
+
 This program solves equations of the form **ax² + bx + c = 0**.
+
 User enters coefficients a, b, c. And then gets answer.
+
 The program gives out amount of roots and the roots of equation. 
 
 <a name="how"></a>
@@ -76,3 +79,4 @@ If you want to use `void UnitTest(int TestOrNot)` you need to change `const int 
 <a name="intro"></a>
 ## 4. Conclusion
 
+It works very good. Nice! :call_me_hand: :love_you_gesture: :+1:
