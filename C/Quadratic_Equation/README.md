@@ -58,7 +58,7 @@ int SolveQE(double a, double b, double c, double* x1, double* x2)
 It compares coefficients with zero to optimize calculations ( in some cases quadratic equation reduces to the linear ), because function of finding sqrt of the discriminant is costly.
 
 Also there are 11 unit tests to check how the program works correctly.
-If you want to use `void UnitTest(int TestOrNot)`{:.С} you need to change `const int TestOrNot`{:.С} to 1.
+If you want to use `void UnitTest(int TestOrNot)`{:.C} you need to change `const int TestOrNot`{.C} to 1.
 
 <a name="ex"></a>
 ## 3. Example:
