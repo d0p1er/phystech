@@ -62,7 +62,8 @@ If you want to use `void UnitTest(int TestOrNot)` you need to change `const int 
 
 <a name="ex"></a>
 ## 3. Example:
-```sh
+
+```zsh
 [out] Saluton mia amiko. This program will help you to solve qudratic equation ax² + bx + c = 0
 [out] Let`s start
 
