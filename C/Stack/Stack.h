@@ -6,19 +6,21 @@
 
 #pragma once
 
-typedef double type;
-#define OUTPUT_FORMAT "%lf"
+typedef long long int type;
+#define OUTPUT_FORMAT "%lld"
 
 struct Stack {
 	type can_1;
+
 	size_t size;
 	size_t capacity;
 	type* data;
+
 	unsigned long long hash_sum;
 	type can_2;
 };
 
-enum errors{
+enum errors {
 	NO_ERRORS = 0,
 	INCORRECT_CAPASITY = 1,
 	NULL_DATA = 2,
@@ -26,8 +28,11 @@ enum errors{
 	Stack_OVERFLOW = 4,
 	Stack_EMPTY = 5,
 	INDEX_OUT_OF_RANGE = 6,
-	INVASION = 7,
-	BAD_HASH = 8
+	BAD_HASH = 7,
+	INVASION_STACK_LEFT = 8,
+	INVASION_STACK_RIGHT = 9,
+	INVASION_DATA_LEFT = 10,
+	INVASION_DATA_RIGHT = 11
 };
 
 extern const char* path_logs;

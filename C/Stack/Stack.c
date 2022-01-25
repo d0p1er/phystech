@@ -129,11 +129,14 @@ int StackError(struct Stack* thou){
 	if (thou == NULL)
 		return NULL_POINTER;
 
-	// if (thou->data == NULL)
-	// 	return NULL_DATA;
-
-	if(thou->can_1 != poison || thou->can_2 != poison || thou->data[-1] != poison || thou->data[thou->capacity + 1] != poison)
-		return INVASION;
+	if (thou->can_1 != poison)
+		return INVASION_STACK_LEFT;
+	if (thou->can_2 != poison)
+		return INVASION_STACK_RIGHT;
+	if (thou->data[-1] != poison)
+		return INVASION_DATA_LEFT;
+	if (thou->data[thou->capacity + 1] != poison)
+		return INVASION_DATA_RIGHT;
 
 	if (thou->size < 0 || thou->capacity < 0)
 		return INDEX_OUT_OF_RANGE;
@@ -162,24 +165,28 @@ unsigned long long CountHash(char* str, const size_t i_start, const size_t i_end
 
 
 unsigned long long RollHash(unsigned long long hash_sum){
-	return (hash_sum << 1) | (hash_sum >> 31);
+	return (hash_sum << 1);
 }
 
-
+// делать экзит из функции где вызывался дамп
 void Dump(struct Stack* thou, int error, const char* func, const int line){
 	if (!error)
 		error = StackError(thou);
 
 	switch (error){
-		case NO_ERRORS:				PrintErrorLogs("(ok)", func, line, NO_ERRORS);							PrintStackLogs(thou);	break;
-		case INCORRECT_CAPASITY:	PrintErrorLogs("(INCORRECT CAPASITY)", func, line, INCORRECT_CAPASITY);							exit(INCORRECT_CAPASITY);
-		case NULL_DATA:				PrintErrorLogs("(NULL DATA)", func, line, NULL_DATA);								exit(NULL_DATA);
-		case NULL_POINTER:			PrintErrorLogs("(NULL POINTER)", func, line, NULL_POINTER);										exit(NULL_POINTER);
-		case Stack_OVERFLOW:		PrintErrorLogs("(Stack OVERFLOW)", func, line, Stack_OVERFLOW);			PrintStackLogs(thou);	exit(Stack_OVERFLOW);
-		case INDEX_OUT_OF_RANGE:	PrintErrorLogs("(INDEX OUT OF RANGE)", func, line, INDEX_OUT_OF_RANGE);							exit(INDEX_OUT_OF_RANGE);
-		case INVASION:				PrintErrorLogs("(INVASION)", func, line, INVASION);						PrintStackLogs(thou);	exit(INVASION);
-		case BAD_HASH:				PrintErrorLogs("(BAD HASH)", func, line, BAD_HASH);						PrintStackLogs(thou);	exit(BAD_HASH);
-		default:					PrintErrorLogs("(UNKNOWN ERROR)", func, line, error);											exit(error);
+		case NO_ERRORS:				PrintErrorLogs("(ok)",					func, line, NO_ERRORS);				PrintStackLogs(thou);	break;
+		case INCORRECT_CAPASITY:	PrintErrorLogs("(INCORRECT CAPASITY)",	func, line, INCORRECT_CAPASITY);							exit(INCORRECT_CAPASITY);
+		case NULL_DATA:				PrintErrorLogs("(NULL DATA)",			func, line, NULL_DATA);										exit(NULL_DATA);
+		case NULL_POINTER:			PrintErrorLogs("(NULL POINTER)",		func, line, NULL_POINTER);									exit(NULL_POINTER);
+		case Stack_OVERFLOW:		PrintErrorLogs("(Stack OVERFLOW)",		func, line, Stack_OVERFLOW);		PrintStackLogs(thou);	exit(Stack_OVERFLOW);
+		case Stack_EMPTY:			PrintErrorLogs("(Stack EMPTY)",			func, line, Stack_EMPTY);			PrintStackLogs(thou);	exit(Stack_EMPTY);
+		case INDEX_OUT_OF_RANGE:	PrintErrorLogs("(INDEX OUT OF RANGE)",	func, line, INDEX_OUT_OF_RANGE);							exit(INDEX_OUT_OF_RANGE);
+		case BAD_HASH:				PrintErrorLogs("(BAD HASH)",			func, line, BAD_HASH);				PrintStackLogs(thou);	exit(BAD_HASH);
+		case INVASION_STACK_LEFT:	PrintErrorLogs("(INVASION_STACK_LEFT)",	func, line, INVASION_STACK_LEFT);	PrintStackLogs(thou);	exit(INVASION_STACK_LEFT);
+		case INVASION_STACK_RIGHT:	PrintErrorLogs("(INVASION_STACK_RIGHT)",func, line, INVASION_STACK_RIGHT);	PrintStackLogs(thou);	exit(INVASION_STACK_RIGHT);
+		case INVASION_DATA_LEFT:	PrintErrorLogs("(INVASION_DATA_LEFT)",	func, line, INVASION_DATA_LEFT);	PrintStackLogs(thou);	exit(INVASION_DATA_LEFT);
+		case INVASION_DATA_RIGHT:	PrintErrorLogs("(INVASION_DATA_RIGHT)",	func, line, INVASION_DATA_RIGHT);	PrintStackLogs(thou);	exit(INVASION_DATA_RIGHT);
+		default:					PrintErrorLogs("(UNKNOWN ERROR)",		func, line, error);											exit(error);
 	}
 }
 
@@ -212,8 +219,8 @@ void PrintStackLogs(struct Stack* thou){
 
 	if (thou->capacity > 0){
 		for (size_t i = 0; i < thou->capacity; i++){
-			// if (thou->data[i] != thou->poison)	// если poison != NAN
-			if (!isnan(thou->data[i]))				// только для double
+			if (thou->data[i] != poison)	// если poison != NAN
+			// if (!isnan(thou->data[i]))				// только для double
 				fprintf(logs_file, "		*[%ld] = "OUTPUT_FORMAT"\n", i, thou->data[i]);
 			else
 				fprintf(logs_file, "		 [%ld] = "OUTPUT_FORMAT"\n", i, thou->data[i]);
