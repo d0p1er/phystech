@@ -14,4 +14,10 @@ I This is repository with main projects, which I did in MIPT. Сontent will be i
 <a name="rep_cont"></a>
 ## 2. Repository content
 
-[1) Quadratic Equation](https://github.com/d0p1er/phystech/tree/master/C/Quadratic_Equation)
+1) [Quadratic Equation](https://github.com/d0p1er/phystech/tree/master/C/Quadratic_Equation)
+2) [Stack](https://github.com/d0p1er/phystech/tree/master/C/Stack)
+3) [CPU](https://github.com/d0p1er/phystech/tree/master/C/Proc)
+4) [Akinator](https://github.com/d0p1er/phystech/tree/master/C/Akinator)
+5) [Calculator](https://github.com/d0p1er/phystech/tree/master/C/Calculator)
+6) [Differentiator](https://github.com/d0p1er/phystech/tree/master/C/Differentiator)
+7) [Hash Table](https://github.com/d0p1er/phystech/tree/master/C/Hash)
