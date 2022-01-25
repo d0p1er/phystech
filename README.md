@@ -14,4 +14,4 @@ I This is repository with main projects, which I did in MIPT. Сontent will be i
 <a name="rep_cont"></a>
 ## 2. Repository content
 
-[1) Quadratic Equation] (https://github.com/d0p1er/phystech/tree/master/C/Quadratic_Equation)
+[1) Quadratic Equation](https://github.com/d0p1er/phystech/tree/master/C/Quadratic_Equation)
