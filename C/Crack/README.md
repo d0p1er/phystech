@@ -46,14 +46,15 @@ But after crack ( взлома жепы Макса ) : I'm in the club. :smirk: 
 ## 3. Example:
 
 I decided to embellish a little.
+
 ![1.gif](Images/1.gif)
+
+<a name="ex2"></a>
+## 4. Example v2 ( using QT ):
 
 But it's not serious for a real hacker like me.
 
 Whereupon I decided to write GUI in QT. It was hard, because I haven't used it before, but now you can watch crack v2 ( взлом жепы Максика PROFESSIONAL VERSION )
-
-<a name="ex2"></a>
-## 4. Example v2 ( using QT ):
 
 ![2.gif](Images/2.gif)
 
