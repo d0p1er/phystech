@@ -1,1 +1,1 @@
-((10)+((30)+(50)))
+COS(x)+10*TG(x^2+x/2-SIN(x^3)+TG(SIN(x^2-COS(SIN(x^5)))))-x+SIN(5*x)+COS(x^5)+x$

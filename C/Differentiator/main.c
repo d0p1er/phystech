@@ -5,12 +5,18 @@ int main() {
 	struct Tree tree = {};
 	TreeConstruct(&tree, NAN);
 
-	struct Variable* variables = (struct Variable*) calloc(10, sizeof(variables[0]));
+	tree.root = ReadMathExpression("Data/expr.txt");
 
-	ReadMathExpression(tree.root, "Data/expr.txt");
+	DBG GraphDump(tree.root, "Data/image1.png");
 
-	// printf("%lf\n", Eval(tree.root, variables));
+	FILE* file = fopen("Data/testlatex.tex", "w");
 
+	PrintLatexStart(tree.root, &tree, file);
+	struct NodeTree* old = tree.root;
+
+	tree.root = Differentation(tree.root, &tree, file);
+
+	PrintLatexEnd(old, tree.root, &tree, file);
 
 	return 0;
 }

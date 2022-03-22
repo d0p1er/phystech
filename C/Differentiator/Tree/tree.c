@@ -87,8 +87,9 @@ void GraphDump(struct NodeTree* node) {
 	
 	fclose(graph_file);
 
-	system("dot -T png Data/graph.gv -o Data/tree.png");
+	system("dot -T png Data/graph.gv -o Data/image.png");
 
+	return;
 }
 
 
