@@ -35,7 +35,7 @@ F ::= {['a'-'z', 'A'-'Z']P}*
 
 Also I add graphviz to debug or just watch the tree. From **COS(x^5) + (13 * x)/27** you get this:
 
-![1.png](Data/1.png)
+![1.png](Images/1.png)
 
 To make code readable I use a little defines in some functions like this:
 
@@ -134,11 +134,11 @@ Some magic and a lot of ifs.
 
 Before optimization expression:
 
-![before.jpg](Data/before.jpg)
+![before.jpg](Images/before.jpg)
 
 After optimization:
 
-![after.jpg](Data/after.jpg)
+![after.jpg](Images/after.jpg)
 
 There are no 0 * tan(...), x^1 = x, 1 * 5 = 5 and much more.
 
