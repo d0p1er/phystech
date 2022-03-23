@@ -20,7 +20,8 @@ I This is repository with main projects, which I did in MIPT. Сontent will be i
 4) [Akinator](https://github.com/d0p1er/phystech/tree/master/C/Akinator)
 5) [Calculator](https://github.com/d0p1er/phystech/tree/master/C/Calculator)
 6) [Differentiator](https://github.com/d0p1er/phystech/tree/master/C/Differentiator)
-7) [Hash Table](https://github.com/d0p1er/phystech/tree/master/C/Hash)
+7) [Crack ( взлом жепы Макса )](https://github.com/d0p1er/phystech/tree/master/C/Crack)
+8) [Hash Table](https://github.com/d0p1er/phystech/tree/master/C/Hash)
 
 <a name="conc"></a>
 ## 3. Conclusion
